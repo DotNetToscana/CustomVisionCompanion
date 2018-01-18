@@ -9,6 +9,7 @@ using Java.Nio;
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace CustomVisionCompanion.Droid.Services
     {
         public async Task<byte[]> ResizeImageAsync(MediaFile file, int width, int height)
         {
+            //var timer = Stopwatch.StartNew();
+
             // Read image from stream
             using (var output = new MemoryStream())
             {
@@ -36,6 +39,9 @@ namespace CustomVisionCompanion.Droid.Services
 
                     image.Save(output, ImageFormats.Jpeg);
                 });
+
+                //timer.Stop();
+                //Console.WriteLine($"Time: {timer.Elapsed.TotalSeconds}s");
 
                 return output.ToArray();
             }
