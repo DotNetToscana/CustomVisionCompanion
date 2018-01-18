@@ -1,15 +1,15 @@
 ﻿{
   "dependencies": {
-    "Acr.UserDialogs": "6.3.10",
+    "Acr.UserDialogs": "7.0.0",
     "ImageSharp": "1.0.0-alpha9-00194",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6",
     "Microsoft.Rest.ClientRuntime": "2.3.10",
     "MvvmLightLibsStd10": "5.4.0.1-alpha",
     "Newtonsoft.Json": "10.0.3",
-    "Xam.Plugin.Media": "3.1.1",
+    "Xam.Plugin.Media": "3.1.2",
     "Xam.Plugins.Settings": "3.1.1",
     "Xam.Plugins.TextToSpeech": "3.0.1",
-    "Xamarin.Forms": "2.5.0.121934"
+    "Xamarin.Forms": "2.5.0.122203"
   },
   "frameworks": {
     "uap10.0.16299": {}
