@@ -16,6 +16,6 @@ namespace CustomVisionCompanion.Common
 
         public const string MainPage = nameof(MainPage);
 
-        public const string AppName = "CustomVisionCompanion";
+        public const string AppName = "Custom Vision Companion";
     }
 }
