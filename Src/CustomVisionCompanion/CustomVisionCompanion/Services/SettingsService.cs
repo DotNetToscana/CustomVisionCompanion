@@ -1,0 +1,52 @@
+using CustomVisionCompanion.Common;
+using Plugin.Settings;
+using Plugin.Settings.Abstractions;
+using System;
+using System.Threading.Tasks;
+
+namespace CustomVisionCompanion.Services
+{
+    /// <summary>
+    /// This is the Settings static class that can be used in your Core solution or in any
+    /// of your client applications. All settings are laid out the same exact way with getters
+    /// and setters.
+    /// </summary>
+    public class SettingsService : ISettingsService
+    {
+        private const string PREDICTION_KEY = nameof(PREDICTION_KEY);
+        private const string PROJECT_ID = nameof(PROJECT_ID);
+        private const string HEIGHT = nameof(HEIGHT);
+        private const string WIDTH = nameof(WIDTH);
+
+        private readonly ISettings settings;
+
+        public SettingsService()
+        {
+            settings = CrossSettings.Current;
+        }
+
+        public string PredictionKey
+        {
+            get => settings.GetValueOrDefault(PREDICTION_KEY, Constants.PredictionKey);
+            set => settings.AddOrUpdateValue(PROJECT_ID, value);
+        }
+
+        public Guid ProjectId
+        {
+            get => settings.GetValueOrDefault(PROJECT_ID, Constants.ProjectId);
+            set => settings.AddOrUpdateValue(PROJECT_ID, value);
+        }
+
+        public int Width
+        {
+            get => settings.GetValueOrDefault(WIDTH, Constants.Width);
+            set => settings.AddOrUpdateValue(WIDTH, value);
+        }
+
+        public int Height
+        {
+            get => settings.GetValueOrDefault(HEIGHT, Constants.Height);
+            set => settings.AddOrUpdateValue(HEIGHT, value);
+        }
+    }
+}

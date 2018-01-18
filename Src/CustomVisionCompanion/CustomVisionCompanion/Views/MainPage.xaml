@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CustomVisionCompanion.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CustomVisionCompanion"
+    Title="Custom Vision Companion"
+    BindingContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding TakePhotoCommand}"
+            Order="Primary"
+            Priority="0"
+            Text="Take pohoto">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="Android, iOS">take_photo.png</On>
+                    <On Platform="UWP">Assets/AppBar/TakePhoto.png</On>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem
+            Command="{Binding PickPhotoCommand}"
+            Order="Primary"
+            Priority="1"
+            Text="Pick photo">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="Android, iOS">pick_photo.png</On>
+                    <On Platform="UWP">Assets/AppBar/PickPhoto.png</On>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Grid.Column="0" Margin="5">
+            <StackLayout 
+                Orientation="Horizontal"
+                HorizontalOptions="Center">
+                <Label
+                    Style="{StaticResource SwitchLabelStyle}"
+                    Text="Online"
+                    VerticalOptions="Center" />
+                <Switch IsToggled="{Binding IsOffline, Mode=TwoWay}" />
+                <Label
+                    Style="{StaticResource SwitchLabelStyle}"
+                    Text="Offline"
+                    VerticalOptions="Center" />
+            </StackLayout>
+            <Image
+                Margin="12"
+                Aspect="AspectFit"
+                Source="{Binding ImageBytes, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                VerticalOptions="Start" />
+        </StackLayout>
+
+        <ListView
+            Grid.Column="1"
+            Margin="0,6,12,12"
+            CachingStrategy="RecycleElementAndDataTemplate"
+            ItemsSource="{Binding Predictions}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label
+                            FontSize="Medium"
+                            Text="{Binding .}"
+                            VerticalOptions="Center" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ActivityIndicator
+            x:Name="Waiting"
+            Grid.ColumnSpan="2"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}">
+            <ActivityIndicator.HorizontalOptions>
+                <OnPlatform x:TypeArguments="LayoutOptions">
+                    <On Platform="Android, iOS">CenterAndExpand</On>
+                    <On Platform="UWP">FillAndExpand</On>
+                </OnPlatform>
+            </ActivityIndicator.HorizontalOptions>
+            <ActivityIndicator.VerticalOptions>
+                <OnPlatform x:TypeArguments="LayoutOptions">
+                    <On Platform="Android, iOS">CenterAndExpand</On>
+                    <On Platform="UWP">FillAndExpand</On>
+                </OnPlatform>
+            </ActivityIndicator.VerticalOptions>
+        </ActivityIndicator>
+    </Grid>
+</ContentPage>
