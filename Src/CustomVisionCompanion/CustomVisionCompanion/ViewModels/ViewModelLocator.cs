@@ -4,6 +4,10 @@ using CustomVisionCompanion.Services;
 using CustomVisionCompanion.Views;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using PriamoAppPsc.ViewModels;
 using System.Globalization;
 using Xamarin.Forms;
@@ -20,7 +24,10 @@ namespace CustomVisionCompanion.ViewModels
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
 
             SimpleIoc.Default.Register<IUserDialogs>(() => UserDialogs.Instance);
-            SimpleIoc.Default.Register<ISettingsService, SettingsService>();            
+            SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+            SimpleIoc.Default.Register<IImageService>(() => DependencyService.Get<IImageService>());
+            SimpleIoc.Default.Register<IPermissions>(() => CrossPermissions.Current);
+            SimpleIoc.Default.Register<IMedia>(() => CrossMedia.Current);
 
             SimpleIoc.Default.Register<MainViewModel>();
         }

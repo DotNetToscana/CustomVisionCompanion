@@ -17,7 +17,7 @@ namespace CustomVisionCompanion.Services
             var settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
 
             // Use the online model.
-            var predictionEndpoint = new PredictionEndpoint() { ApiKey = settingsService.PredictionKey };
+            var predictionEndpoint = new PredictionEndpoint { ApiKey = settingsService.PredictionKey };
             var predictions = await predictionEndpoint.PredictImageAsync(settingsService.ProjectId, image);
 
             var results = predictions.Predictions.Select(p => new Recognition

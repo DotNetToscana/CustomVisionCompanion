@@ -17,6 +17,10 @@ namespace PriamoAppPsc.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly IMedia mediaService;
+        private readonly IPermissions permissionsService;
+        private readonly IImageService imageService;
+
         private IEnumerable<string> predictions;
         public IEnumerable<string> Predictions
         {
@@ -42,13 +46,11 @@ namespace PriamoAppPsc.ViewModels
 
         public AutoRelayCommand PickPhotoCommand { get; private set; }
 
-        private readonly IMedia media;
-        private readonly IPermissions permission;
-
-        public MainViewModel()
+        public MainViewModel(IPermissions permissionsService, IMedia mediaService, IImageService imageService)
         {
-            media = Plugin.Media.CrossMedia.Current;
-            permission = CrossPermissions.Current;
+            this.mediaService = mediaService;
+            this.permissionsService = permissionsService;
+            this.imageService = imageService;
 
             CreateCommands();
         }
@@ -64,7 +66,7 @@ namespace PriamoAppPsc.ViewModels
             await AnalyzeAsync(Permission.Camera, async () =>
             {
                 // Take a photo using the camera.
-                var file = await media.TakePhotoAsync(new StoreCameraMediaOptions
+                var file = await mediaService.TakePhotoAsync(new StoreCameraMediaOptions
                 {
                     SaveToAlbum = false,
                     PhotoSize = PhotoSize.Medium,
@@ -80,7 +82,7 @@ namespace PriamoAppPsc.ViewModels
             await AnalyzeAsync(Permission.Photos, async () =>
             {
                 // Pick a photo from the gallery.
-                var file = await media.PickPhotoAsync();
+                var file = await mediaService.PickPhotoAsync();
 
                 return file;
             });
@@ -98,15 +100,15 @@ namespace PriamoAppPsc.ViewModels
                 // On Android, if users are running Marshmallow the Media Plugin will automatically prompt them for runtime permissions.
                 if (Device.RuntimePlatform == Device.iOS)
                 {
-                    status = await permission.CheckPermissionStatusAsync(permissionType);
+                    status = await permissionsService.CheckPermissionStatusAsync(permissionType);
                     if (status != PermissionStatus.Granted)
                     {
-                        if (await permission.ShouldShowRequestPermissionRationaleAsync(permissionType))
+                        if (await permissionsService.ShouldShowRequestPermissionRationaleAsync(permissionType))
                         {
                             await DialogService.AlertAsync($"This app needs access to {permissionType}, please accept the request.", Constants.AppName);
                         }
 
-                        var results = await permission.RequestPermissionsAsync(permissionType);
+                        var results = await permissionsService.RequestPermissionsAsync(permissionType);
 
                         //Best practice to always check that the key exists
                         if (results.ContainsKey(permissionType))
@@ -121,7 +123,7 @@ namespace PriamoAppPsc.ViewModels
                     // Clean up previous results.
                     CleanUp();
 
-                    await media.Initialize();
+                    await mediaService.Initialize();
 
                     try
                     {
@@ -153,7 +155,6 @@ namespace PriamoAppPsc.ViewModels
                 try
                 {
                     // Resize the photo and show it.
-                    var imageService = DependencyService.Get<IImageService>();
                     ImageBytes = await imageService.ResizeImageAsync(file, SettingsService.Width, SettingsService.Height);
 
                     // Check whether to use the online or offline version of the prediction model.
