@@ -13,7 +13,7 @@ using Xamarin.Forms;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 
-namespace PriamoAppPsc.ViewModels
+namespace CustomVisionCompanion.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {

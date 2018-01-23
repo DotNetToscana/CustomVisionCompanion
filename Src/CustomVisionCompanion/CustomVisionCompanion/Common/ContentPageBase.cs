@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using GalaSoft.MvvmLight.Messaging;
-using PriamoAppPsc.ViewModels;
+using CustomVisionCompanion.ViewModels;
 
 namespace CustomVisionCompanion.Common
 {

@@ -8,7 +8,7 @@ using CustomVisionCompanion.Common;
 using CustomVisionCompanion.Services;
 using GalaSoft.MvvmLight.Ioc;
 
-namespace PriamoAppPsc.ViewModels
+namespace CustomVisionCompanion.ViewModels
 {
     public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase, INavigable
     {

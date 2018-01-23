@@ -8,7 +8,6 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
-using PriamoAppPsc.ViewModels;
 using System.Globalization;
 using Xamarin.Forms;
 
