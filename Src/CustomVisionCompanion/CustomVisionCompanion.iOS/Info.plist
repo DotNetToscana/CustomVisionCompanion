@@ -22,9 +22,9 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>CustomVisionCompanion</string>
+	<string>Custom Vision Companion</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.CustomVisionCompanion</string>
+	<string>org.dotnettoscana.customvisioncompanion</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
