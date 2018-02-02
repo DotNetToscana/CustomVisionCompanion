@@ -40,10 +40,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackLayout Grid.Column="0" Margin="5">
-            <StackLayout 
-                Orientation="Horizontal"
-                HorizontalOptions="Center">
+        <StackLayout Grid.Column="0" Margin="5,10,5,5">
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Label
                     Style="{StaticResource SwitchLabelStyle}"
                     Text="Online"
@@ -63,7 +61,7 @@
 
         <ListView
             Grid.Column="1"
-            Margin="0,6,12,12"
+            Margin="0,1,12,12"
             CachingStrategy="RecycleElementAndDataTemplate"
             ItemsSource="{Binding Predictions}">
             <ListView.ItemTemplate>

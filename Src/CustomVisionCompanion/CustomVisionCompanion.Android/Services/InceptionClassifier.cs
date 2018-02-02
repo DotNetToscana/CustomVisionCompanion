@@ -35,23 +35,19 @@ namespace CustomVisionCompanion.Droid.Services
         private List<String> labels;
         private TensorFlowInferenceInterface inferenceInterface;
 
-        public InceptionClassifier()
+        private void Initialize()
         {
             var assetManager = CrossCurrentActivity.Current.Activity.Assets;
 
             labels = new List<string>();
-            labels.AddRange(ReadLabelsIntoMemory(assetManager, LABEL_FILE));
-
-            inferenceInterface = new TensorFlowInferenceInterface(assetManager, MODEL_FILE);
-        }
-
-        private IEnumerable<string> ReadLabelsIntoMemory(AssetManager assets, string fileName)
-        {
-            using (var sr = new StreamReader(assets.Open(fileName)))
+            using (var sr = new StreamReader(assetManager.Open(LABEL_FILE)))
             {
                 var content = sr.ReadToEnd();
-                return content.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(e => e.TrimEnd('\r'));
+                var labelStrings = content.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(e => e.TrimEnd('\r'));
+                labels.AddRange(labelStrings);
             }
+
+            inferenceInterface = new TensorFlowInferenceInterface(assetManager, MODEL_FILE);
         }
 
         private IEnumerable<Recognition> Recognize(Bitmap bitmap)
@@ -91,13 +87,16 @@ namespace CustomVisionCompanion.Droid.Services
 
             // Sort high-to-low via confidence
             Array.Sort(results, (x, y) => y.Probability.CompareTo(x.Probability));
-            Console.WriteLine(results[0]);
-
             return results;
         }
 
         public async Task<IEnumerable<Recognition>> RecognizeAsync(Stream image)
         {
+            if (inferenceInterface == null)
+            {
+                await Task.Run(() => Initialize());
+            }
+
             var bitmap = await BitmapFactory.DecodeStreamAsync(image);
             var results = await Task.Run(() => Recognize(bitmap));
 

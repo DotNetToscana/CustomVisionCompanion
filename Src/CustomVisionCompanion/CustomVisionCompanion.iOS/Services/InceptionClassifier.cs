@@ -26,13 +26,10 @@ namespace CustomVisionCompanion.iOS.Services
         private const string INPUT_NAME = "data";
         private const string OUTPUT_NAME = "loss";
 
+        public const string MODEL_NAME = "Computer";
+
         private readonly CGSize ImageSize = new CGSize(INPUT_WIDTH, INPUT_HEIGHT);
         private MLModel model;
-
-        public InceptionClassifier()
-        {
-            model = LoadModel("Computer");
-        }
 
         private IEnumerable<Recognition> Recognize(Stream source)
         {
@@ -41,7 +38,7 @@ namespace CustomVisionCompanion.iOS.Services
 
             if (model == null)
             {
-                //ErrorOccurred(this, new EventArgsT<string>(error.ToString()));
+                //ErrorOccurred(this, new EventArgs<string>(error.ToString()));
                 return byProbability;
             }
 
@@ -78,26 +75,28 @@ namespace CustomVisionCompanion.iOS.Services
 
             //Sort descending
             byProbability.Sort((t1, t2) => (t1.Probability.CompareTo(t2.Probability)) * -1);
-
             return byProbability;
         }
 
-        private MLModel LoadModel(string modelName)
+        private void LoadModel(string modelName)
         {
             var bundle = NSBundle.MainBundle;
             var assetPath = bundle.GetUrlForResource(modelName, "mlmodelc");
-            var mdl = MLModel.Create(assetPath, out var error);
+            model = MLModel.Create(assetPath, out var error);
 
             if (error != null)
             {
                 //ErrorOccurred(this, new EventArgs<string>(err.ToString()));
             }
-
-            return mdl;
         }
 
         public async Task<IEnumerable<Recognition>> RecognizeAsync(Stream image)
         {
+            if (model == null)
+            {
+                await Task.Run(() => LoadModel(MODEL_NAME));
+            }
+
             var results = await Task.Run(() => Recognize(image));
             return results;
         }
