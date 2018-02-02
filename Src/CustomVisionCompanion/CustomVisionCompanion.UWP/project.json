@@ -8,7 +8,7 @@
     "Newtonsoft.Json": "10.0.3",
     "Xam.Plugin.Media": "3.1.1",
     "Xam.Plugins.Settings": "3.1.1",
-    "Xamarin.Forms": "2.5.0.121934"
+    "Xamarin.Forms": "2.5.0.122203"
   },
   "frameworks": {
     "uap10.0.16299": {}
