@@ -26,7 +26,8 @@ namespace CustomVisionCompanion.iOS.Services
         private const string INPUT_NAME = "data";
         private const string OUTPUT_NAME = "loss";
 
-        public const string MODEL_NAME = "Computer";
+        private const string MODEL_NAME = "Computer";
+        private const string COMPILED_MODEL_NAME = "mlmodelc";
 
         private readonly CGSize ImageSize = new CGSize(INPUT_WIDTH, INPUT_HEIGHT);
         private MLModel model;
@@ -81,7 +82,7 @@ namespace CustomVisionCompanion.iOS.Services
         private void LoadModel(string modelName)
         {
             var bundle = NSBundle.MainBundle;
-            var assetPath = bundle.GetUrlForResource(modelName, "mlmodelc");
+            var assetPath = bundle.GetUrlForResource(modelName, COMPILED_MODEL_NAME);
             model = MLModel.Create(assetPath, out var error);
 
             if (error != null)
