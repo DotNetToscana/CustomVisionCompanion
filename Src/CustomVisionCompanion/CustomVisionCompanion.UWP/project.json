@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Acr.UserDialogs": "6.3.10",
+    "Acr.UserDialogs": "7.0.1",
     "ImageSharp": "1.0.0-alpha9-00194",
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6",
     "Microsoft.Rest.ClientRuntime": "2.3.10",
