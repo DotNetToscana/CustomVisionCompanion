@@ -71,9 +71,6 @@
       <HintPath>..\..\packages\ImageSharp.1.0.0-alpha9-00194\lib\netstandard1.3\ImageSharp.dll</HintPath>
     </Reference>
     <Reference Include="Java.Interop" />
-    <Reference Include="Magick.NET-Q8-AnyCPU, Version=7.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Magick.NET-Q8-AnyCPU.7.2.1\lib\netstandard13\Magick.NET-Q8-AnyCPU.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Cognitive.CustomVision.Prediction, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Cognitive.CustomVision.Prediction.1.2.0\lib\dotnet\Microsoft.Cognitive.CustomVision.Prediction.dll</HintPath>
     </Reference>
