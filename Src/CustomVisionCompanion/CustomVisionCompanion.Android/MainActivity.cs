@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -7,11 +8,12 @@ using Android.Widget;
 using Android.OS;
 using Plugin.Permissions;
 using Acr.UserDialogs;
+using Plugin.CustomVisionEngine;
+using Plugin.CustomVisionEngine.Models;
 
 namespace CustomVisionCompanion.Droid
 {
-    [Activity(Label = "Custom Vision Companion", Icon = "@drawable/icon", Theme = "@style/MainTheme",
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Landscape)]
+    [Activity(Label = "CustomVisionCompanion", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -24,11 +26,18 @@ namespace CustomVisionCompanion.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             UserDialogs.Init(this);
             LoadApplication(new App());
+
+            var task = CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "model.pb", "labels.txt");
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        protected override void OnPause()
         {
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            App.IsPausing = true;
+            base.OnPause();
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

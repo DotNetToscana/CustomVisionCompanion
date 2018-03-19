@@ -1,3 +1,9 @@
-keyboard
-laptop
-mouse
+bastione-della-biscia
+bastione-grosso-dei-berruti
+castello
+chiesa-domenicani
+chiesa-santa-lucia
+chiesa-santa-teresa
+fontana-braki-delle-confrarie
+obelisco
+parrocchia

@@ -1246,44 +1246,44 @@ namespace CustomVisionCompanion.Droid
 		public partial class Color
 		{
 			
+			// aapt resource value: 0x7f0d004a
+			public const int abc_background_cache_hint_selector_material_dark = 2131558474;
+			
 			// aapt resource value: 0x7f0d004b
-			public const int abc_background_cache_hint_selector_material_dark = 2131558475;
+			public const int abc_background_cache_hint_selector_material_light = 2131558475;
 			
 			// aapt resource value: 0x7f0d004c
-			public const int abc_background_cache_hint_selector_material_light = 2131558476;
+			public const int abc_btn_colored_borderless_text_material = 2131558476;
 			
 			// aapt resource value: 0x7f0d004d
-			public const int abc_btn_colored_borderless_text_material = 2131558477;
+			public const int abc_btn_colored_text_material = 2131558477;
 			
 			// aapt resource value: 0x7f0d004e
-			public const int abc_btn_colored_text_material = 2131558478;
+			public const int abc_color_highlight_material = 2131558478;
 			
 			// aapt resource value: 0x7f0d004f
-			public const int abc_color_highlight_material = 2131558479;
+			public const int abc_hint_foreground_material_dark = 2131558479;
 			
 			// aapt resource value: 0x7f0d0050
-			public const int abc_hint_foreground_material_dark = 2131558480;
-			
-			// aapt resource value: 0x7f0d0051
-			public const int abc_hint_foreground_material_light = 2131558481;
+			public const int abc_hint_foreground_material_light = 2131558480;
 			
 			// aapt resource value: 0x7f0d0005
 			public const int abc_input_method_navigation_guard = 2131558405;
 			
+			// aapt resource value: 0x7f0d0051
+			public const int abc_primary_text_disable_only_material_dark = 2131558481;
+			
 			// aapt resource value: 0x7f0d0052
-			public const int abc_primary_text_disable_only_material_dark = 2131558482;
+			public const int abc_primary_text_disable_only_material_light = 2131558482;
 			
 			// aapt resource value: 0x7f0d0053
-			public const int abc_primary_text_disable_only_material_light = 2131558483;
+			public const int abc_primary_text_material_dark = 2131558483;
 			
 			// aapt resource value: 0x7f0d0054
-			public const int abc_primary_text_material_dark = 2131558484;
+			public const int abc_primary_text_material_light = 2131558484;
 			
 			// aapt resource value: 0x7f0d0055
-			public const int abc_primary_text_material_light = 2131558485;
-			
-			// aapt resource value: 0x7f0d0056
-			public const int abc_search_url_text = 2131558486;
+			public const int abc_search_url_text = 2131558485;
 			
 			// aapt resource value: 0x7f0d0006
 			public const int abc_search_url_text_normal = 2131558406;
@@ -1294,32 +1294,32 @@ namespace CustomVisionCompanion.Droid
 			// aapt resource value: 0x7f0d0008
 			public const int abc_search_url_text_selected = 2131558408;
 			
+			// aapt resource value: 0x7f0d0056
+			public const int abc_secondary_text_material_dark = 2131558486;
+			
 			// aapt resource value: 0x7f0d0057
-			public const int abc_secondary_text_material_dark = 2131558487;
+			public const int abc_secondary_text_material_light = 2131558487;
 			
 			// aapt resource value: 0x7f0d0058
-			public const int abc_secondary_text_material_light = 2131558488;
+			public const int abc_tint_btn_checkable = 2131558488;
 			
 			// aapt resource value: 0x7f0d0059
-			public const int abc_tint_btn_checkable = 2131558489;
+			public const int abc_tint_default = 2131558489;
 			
 			// aapt resource value: 0x7f0d005a
-			public const int abc_tint_default = 2131558490;
+			public const int abc_tint_edittext = 2131558490;
 			
 			// aapt resource value: 0x7f0d005b
-			public const int abc_tint_edittext = 2131558491;
+			public const int abc_tint_seek_thumb = 2131558491;
 			
 			// aapt resource value: 0x7f0d005c
-			public const int abc_tint_seek_thumb = 2131558492;
+			public const int abc_tint_spinner = 2131558492;
 			
 			// aapt resource value: 0x7f0d005d
-			public const int abc_tint_spinner = 2131558493;
+			public const int abc_tint_switch_thumb = 2131558493;
 			
 			// aapt resource value: 0x7f0d005e
-			public const int abc_tint_switch_thumb = 2131558494;
-			
-			// aapt resource value: 0x7f0d005f
-			public const int abc_tint_switch_track = 2131558495;
+			public const int abc_tint_switch_track = 2131558494;
 			
 			// aapt resource value: 0x7f0d0009
 			public const int accent_material_dark = 2131558409;
@@ -1378,8 +1378,8 @@ namespace CustomVisionCompanion.Droid
 			// aapt resource value: 0x7f0d003f
 			public const int design_bottom_navigation_shadow_color = 2131558463;
 			
-			// aapt resource value: 0x7f0d0060
-			public const int design_error = 2131558496;
+			// aapt resource value: 0x7f0d005f
+			public const int design_error = 2131558495;
 			
 			// aapt resource value: 0x7f0d0040
 			public const int design_fab_shadow_end_color = 2131558464;
@@ -1411,8 +1411,8 @@ namespace CustomVisionCompanion.Droid
 			// aapt resource value: 0x7f0d0049
 			public const int design_textinput_error_color_light = 2131558473;
 			
-			// aapt resource value: 0x7f0d0061
-			public const int design_tint_password_toggle = 2131558497;
+			// aapt resource value: 0x7f0d0060
+			public const int design_tint_password_toggle = 2131558496;
 			
 			// aapt resource value: 0x7f0d0017
 			public const int dim_foreground_disabled_material_dark = 2131558423;
@@ -1525,20 +1525,17 @@ namespace CustomVisionCompanion.Droid
 			// aapt resource value: 0x7f0d003a
 			public const int secondary_text_disabled_material_light = 2131558458;
 			
-			// aapt resource value: 0x7f0d004a
-			public const int splash_background = 2131558474;
-			
 			// aapt resource value: 0x7f0d003b
 			public const int switch_thumb_disabled_material_dark = 2131558459;
 			
 			// aapt resource value: 0x7f0d003c
 			public const int switch_thumb_disabled_material_light = 2131558460;
 			
-			// aapt resource value: 0x7f0d0062
-			public const int switch_thumb_material_dark = 2131558498;
+			// aapt resource value: 0x7f0d0061
+			public const int switch_thumb_material_dark = 2131558497;
 			
-			// aapt resource value: 0x7f0d0063
-			public const int switch_thumb_material_light = 2131558499;
+			// aapt resource value: 0x7f0d0062
+			public const int switch_thumb_material_light = 2131558498;
 			
 			// aapt resource value: 0x7f0d003d
 			public const int switch_thumb_normal_material_dark = 2131558461;
@@ -2268,26 +2265,26 @@ namespace CustomVisionCompanion.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
+			// aapt resource value: 0x7f020115
+			public const int avd_hide_password_1 = 2130837781;
+			
+			// aapt resource value: 0x7f020116
+			public const int avd_hide_password_2 = 2130837782;
+			
 			// aapt resource value: 0x7f020117
-			public const int avd_hide_password_1 = 2130837783;
-			
-			// aapt resource value: 0x7f020118
-			public const int avd_hide_password_2 = 2130837784;
-			
-			// aapt resource value: 0x7f020119
-			public const int avd_hide_password_3 = 2130837785;
+			public const int avd_hide_password_3 = 2130837783;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
+			// aapt resource value: 0x7f020118
+			public const int avd_show_password_1 = 2130837784;
+			
+			// aapt resource value: 0x7f020119
+			public const int avd_show_password_2 = 2130837785;
+			
 			// aapt resource value: 0x7f02011a
-			public const int avd_show_password_1 = 2130837786;
-			
-			// aapt resource value: 0x7f02011b
-			public const int avd_show_password_2 = 2130837787;
-			
-			// aapt resource value: 0x7f02011c
-			public const int avd_show_password_3 = 2130837788;
+			public const int avd_show_password_3 = 2130837786;
 			
 			// aapt resource value: 0x7f020055
 			public const int design_bottom_navigation_item_background = 2130837589;
@@ -2838,11 +2835,11 @@ namespace CustomVisionCompanion.Droid
 			// aapt resource value: 0x7f02010b
 			public const int notification_icon_background = 2130837771;
 			
-			// aapt resource value: 0x7f020115
-			public const int notification_template_icon_bg = 2130837781;
+			// aapt resource value: 0x7f020113
+			public const int notification_template_icon_bg = 2130837779;
 			
-			// aapt resource value: 0x7f020116
-			public const int notification_template_icon_low_bg = 2130837782;
+			// aapt resource value: 0x7f020114
+			public const int notification_template_icon_low_bg = 2130837780;
 			
 			// aapt resource value: 0x7f02010c
 			public const int notification_tile_bg = 2130837772;
@@ -2863,13 +2860,7 @@ namespace CustomVisionCompanion.Droid
 			public const int roundedbgdark = 2130837777;
 			
 			// aapt resource value: 0x7f020112
-			public const int splash = 2130837778;
-			
-			// aapt resource value: 0x7f020113
-			public const int splash_screen = 2130837779;
-			
-			// aapt resource value: 0x7f020114
-			public const int take_photo = 2130837780;
+			public const int take_photo = 2130837778;
 			
 			static Drawable()
 			{
@@ -3966,8 +3957,8 @@ namespace CustomVisionCompanion.Droid
 			// aapt resource value: 0x7f0c0170
 			public const int Animation_Design_BottomSheetDialog = 2131493232;
 			
-			// aapt resource value: 0x7f0c018c
-			public const int AppCompatDialogStyle = 2131493260;
+			// aapt resource value: 0x7f0c018b
+			public const int AppCompatDialogStyle = 2131493259;
 			
 			// aapt resource value: 0x7f0c00b2
 			public const int Base_AlertDialog_AppCompat = 2131493042;
@@ -4443,11 +4434,11 @@ namespace CustomVisionCompanion.Droid
 			// aapt resource value: 0x7f0c000e
 			public const int CardView_Light = 2131492878;
 			
-			// aapt resource value: 0x7f0c018a
-			public const int MainTheme = 2131493258;
+			// aapt resource value: 0x7f0c0189
+			public const int MainTheme = 2131493257;
 			
-			// aapt resource value: 0x7f0c018b
-			public const int MainTheme_Base = 2131493259;
+			// aapt resource value: 0x7f0c018a
+			public const int MainTheme_Base = 2131493258;
 			
 			// aapt resource value: 0x7f0c002d
 			public const int Platform_AppCompat = 2131492909;
@@ -4850,9 +4841,6 @@ namespace CustomVisionCompanion.Droid
 			
 			// aapt resource value: 0x7f0c0006
 			public const int Theme_MediaRouter_LightControlPanel = 2131492870;
-			
-			// aapt resource value: 0x7f0c0189
-			public const int Theme_Splash = 2131493257;
 			
 			// aapt resource value: 0x7f0c011f
 			public const int ThemeOverlay_AppCompat = 2131493151;

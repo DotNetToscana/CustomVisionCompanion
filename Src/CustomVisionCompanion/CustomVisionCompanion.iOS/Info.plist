@@ -15,16 +15,17 @@
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>10.3</string>
 	<key>CFBundleDisplayName</key>
-	<string>Custom Vision Companion</string>
+	<string>CustomVisionCompanion</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.dotnettoscana.customvisioncompanion</string>
+	<string>com.yourcompany.CustomVisionCompanion</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
@@ -49,11 +50,5 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>CustomVisionCompanion</string>
-	<key>NSCameraUsageDescription</key>
-	<string>CustomVisionCompanion wants to acces your Camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>CustomVisionCompanion wants to acces your Photo Library</string>
-	<key>UIRequiresFullScreen</key>
-	<true/>
 </dict>
 </plist>

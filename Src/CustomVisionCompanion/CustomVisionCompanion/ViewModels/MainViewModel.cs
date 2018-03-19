@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Plugin.CustomVisionEngine;
+using Plugin.CustomVisionEngine.Models;
 
 namespace CustomVisionCompanion.ViewModels
 {
@@ -19,7 +21,6 @@ namespace CustomVisionCompanion.ViewModels
     {
         private readonly IMedia mediaService;
         private readonly IPermissions permissionsService;
-        private readonly IImageService imageService;
 
         private IEnumerable<string> predictions;
         public IEnumerable<string> Predictions
@@ -35,22 +36,21 @@ namespace CustomVisionCompanion.ViewModels
             set => Set(ref isOffline, value);
         }
 
-        private byte[] imageBytes;
-        public byte[] ImageBytes
+        private Stream image;
+        public Stream Image
         {
-            get => imageBytes;
-            set => Set(ref imageBytes, value);
+            get => image;
+            set => Set(ref image, value);
         }
 
         public AutoRelayCommand TakePhotoCommand { get; private set; }
 
         public AutoRelayCommand PickPhotoCommand { get; private set; }
 
-        public MainViewModel(IPermissions permissionsService, IMedia mediaService, IImageService imageService)
+        public MainViewModel(IPermissions permissionsService, IMedia mediaService)
         {
             this.mediaService = mediaService;
             this.permissionsService = permissionsService;
-            this.imageService = imageService;
 
             CreateCommands();
         }
@@ -69,8 +69,10 @@ namespace CustomVisionCompanion.ViewModels
                 var file = await mediaService.TakePhotoAsync(new StoreCameraMediaOptions
                 {
                     SaveToAlbum = false,
-                    PhotoSize = PhotoSize.Medium,
-                    AllowCropping = false
+                    PhotoSize = PhotoSize.MaxWidthHeight,
+                    AllowCropping = false,
+                    MaxWidthHeight = 1920,
+                    CompressionQuality = 85
                 });
 
                 return file;
@@ -154,13 +156,23 @@ namespace CustomVisionCompanion.ViewModels
 
                 try
                 {
-                    // Resize the photo and show it.
-                    ImageBytes = await imageService.ResizeImageAsync(file, SettingsService.Width, SettingsService.Height);
+                    Image = file.GetStream();
 
                     // Check whether to use the online or offline version of the prediction model.
-                    var classifier = isOffline ? DependencyService.Get<IClassifier>() : new CustomVisionClassifier();
-                    var predictionsRecognized = await classifier.RecognizeAsync(new MemoryStream(imageBytes));
+                    IEnumerable<Recognition> predictionsRecognized = null;
+                    if (isOffline)
+                    {
+                        var classifier = CrossOfflineClassifier.Current;
+                        predictionsRecognized = await classifier.RecognizeAsync(file.GetStream(), file.Path);
+                    }
+                    else
+                    {
+                        var classifier = CrossOnlineClassifier.Current;
+                        predictionsRecognized = await classifier.RecognizeAsync(SettingsService.PredictionKey, SettingsService.ProjectId, file.GetStream());
+                    }
+
                     Predictions = predictionsRecognized.Select(p => $"{p.Tag}: {p.Probability:P1}");
+                    file.Dispose();
                 }
                 catch (Exception ex)
                 {
@@ -176,7 +188,8 @@ namespace CustomVisionCompanion.ViewModels
         private void CleanUp()
         {
             Predictions = null;
-            ImageBytes = null;
+            Image?.Dispose();
+            Image = null;
         }
     }
 }

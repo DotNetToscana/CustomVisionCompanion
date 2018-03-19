@@ -24,7 +24,6 @@ namespace CustomVisionCompanion.ViewModels
 
             SimpleIoc.Default.Register<IUserDialogs>(() => UserDialogs.Instance);
             SimpleIoc.Default.Register<ISettingsService, SettingsService>();
-            SimpleIoc.Default.Register<IImageService>(() => DependencyService.Get<IImageService>());
             SimpleIoc.Default.Register<IPermissions>(() => CrossPermissions.Current);
             SimpleIoc.Default.Register<IMedia>(() => CrossMedia.Current);
 

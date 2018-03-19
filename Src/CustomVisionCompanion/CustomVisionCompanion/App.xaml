@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application
     x:Class="CustomVisionCompanion.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -9,11 +9,16 @@
 
     <Application.Resources>
 
-        <ResourceDictionary MergedWith="resources:Styles">
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:Styles />
+            </ResourceDictionary.MergedDictionaries>
+
             <sys:String x:Key="AppName">Custom Vision Companion</sys:String>
             <vm:ViewModelLocator xmlns:vm="clr-namespace:CustomVisionCompanion.ViewModels" x:Key="Locator" />
 
-            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />            
+            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+            <converters:StreamToImageSourceConverter x:Key="StreamToImageSourceConverter" />
         </ResourceDictionary>
 
     </Application.Resources>
