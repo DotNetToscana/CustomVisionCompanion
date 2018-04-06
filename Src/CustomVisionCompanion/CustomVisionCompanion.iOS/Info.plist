@@ -50,5 +50,9 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>CustomVisionCompanion</string>
+	<key>NSCameraUsageDescription</key>
+	<string>CustomVisionCompanion wants to acces your Camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>CustomVisionCompanion wants to acces your Photo Library</string>
 </dict>
 </plist>

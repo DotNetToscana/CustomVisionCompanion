@@ -88,12 +88,9 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Computer.cs">
-      <DependentUpon>Computer.mlmodel</DependentUpon>
-    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <None Include="Computer.mlmodel" />
+    <BundleResource Include="Resources\Computer.mlmodel" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +130,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\CustomVisionEngine\CustomVisionEngine.csproj">
+      <Project>{afb58d7e-8008-479f-84b0-ff330c73fb39}</Project>
+      <Name>CustomVisionEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomVisionCompanion\CustomVisionCompanion.csproj">
       <Project>{6DE97CFA-3E9C-4AFC-81B4-AF3CCA4940E8}</Project>
       <Name>CustomVisionCompanion</Name>

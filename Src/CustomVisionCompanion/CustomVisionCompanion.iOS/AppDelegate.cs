@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Plugin.CustomVisionEngine;
+using Plugin.CustomVisionEngine.Models;
 using UIKit;
 
 namespace CustomVisionCompanion.iOS
@@ -24,6 +26,8 @@ namespace CustomVisionCompanion.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            var task = CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "Computer");
 
             return base.FinishedLaunching(app, options);
         }

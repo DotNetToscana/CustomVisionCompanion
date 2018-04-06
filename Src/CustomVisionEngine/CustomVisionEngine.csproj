@@ -70,38 +70,30 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction">
-      <Version>1.2.0</Version>
+    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0">
     </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime">
-      <Version>2.3.10</Version>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10">
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'uap10.0.16299'">
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction">
-      <Version>1.2.0</Version>
+    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0">
     </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime">
-      <Version>2.3.10</Version>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10">
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction">
-      <Version>1.2.0</Version>
+    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0">
     </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime">
-      <Version>2.3.10</Version>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10">
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction">
-      <Version>1.2.0</Version>
+    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0">
     </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime">
-      <Version>2.3.10</Version>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10">
     </PackageReference>
   </ItemGroup>
 
