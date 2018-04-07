@@ -32,31 +32,29 @@ namespace Plugin.CustomVisionEngine
         {
             await Task.Run(() =>
             {
-                var modelPath = NSBundle.MainBundle.GetUrlForResource(parameters[0], COMPILED_MODEL_EXT) ?? CompileModel(parameters[0]);
-
+                var modelName = parameters[0];
+                var modelPath = NSBundle.MainBundle.GetUrlForResource(modelName, COMPILED_MODEL_EXT) ?? CompileModel(modelName);
                 if (modelPath == null)
-                    throw new ClassifierException($"Model {parameters[0]} does not exist");
+                {
+                    throw new ClassifierException($"Model {modelName} doesn't exist.");
+                }
 
-                model = MLModel.Create(modelPath, out NSError err);
+                model = MLModel.Create(modelPath, out var err);
 
                 if (err != null)
-                    throw new ClassifierException($"Generic error: {err.ToString()}");
+                {
+                    throw new ClassifierException(err.ToString());
+                }
             });
         }
 
         public async Task<IEnumerable<Recognition>> RecognizeAsync(Stream source, params string[] parameters)
         {
-            var byProbability = new List<Recognition>();
-
+            var results = new List<Recognition>();
             var image = await UIImage.LoadFromData(NSData.FromStream(source)).ResizeImageAsync(INPUT_WIDTH, INPUT_HEIGHT);
 
             await Task.Run(() =>
             {
-                if (model == null)
-                {
-                    throw new ArgumentNullException();
-                }
-
                 var pixelBuffer = image.Scale(ImageSize).ToCVPixelBuffer();
                 var imageValue = MLFeatureValue.Create(pixelBuffer);
 
@@ -65,42 +63,42 @@ namespace Plugin.CustomVisionEngine
                 var inputFeatureProvider = new MLDictionaryFeatureProvider(inputs, out var error1);
                 if (error1 != null)
                 {
-                    throw new ClassifierException($"Recognize Error: {error1}");
+                    throw new ClassifierException(error1.ToString());
                 }
 
                 var outFeatures = model.GetPrediction(inputFeatureProvider, out var error2);
                 if (error2 != null)
                 {
-                    throw new ClassifierException($"Recognize Error: {error2}");
+                    throw new ClassifierException(error2.ToString());
                 }
 
                 var predictionsDictionary = outFeatures.GetFeatureValue(OUTPUT_NAME).DictionaryValue;
                 foreach (var key in predictionsDictionary.Keys)
                 {
                     var description = (string)(NSString)key;
-                    var prob = (double)predictionsDictionary[key];
-                    byProbability.Add(new Recognition
+                    var probability = (double)predictionsDictionary[key];
+                    results.Add(new Recognition
                     {
                         Tag = description,
-                        Probability = prob
+                        Probability = probability
                     });
                 }
 
-                //Sort descending
-                byProbability.Sort((t1, t2) => (t1.Probability.CompareTo(t2.Probability)) * -1);
+                // Sort descending.
+                results.Sort((t1, t2) => (t1.Probability.CompareTo(t2.Probability)) * -1);
             });
 
-            return byProbability;
+            return results;
         }
 
         private NSUrl CompileModel(string modelName)
         {
             var uncompiled = NSBundle.MainBundle.GetUrlForResource(modelName, MODEL_EXT);
-            var modelPath = MLModel.CompileModel(uncompiled, out NSError err);
+            var modelPath = MLModel.CompileModel(uncompiled, out var err);
 
             if (err != null)
             {
-                throw new ClassifierException($"Generic error: {err.ToString()}");
+                throw new ClassifierException(err.ToString());
             }
 
             return modelPath;

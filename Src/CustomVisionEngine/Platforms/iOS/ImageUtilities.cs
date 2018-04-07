@@ -12,6 +12,7 @@ namespace Plugin.CustomVisionEngine.Platforms.iOS
         public static async Task<UIImage> ResizeImageAsync(this UIImage image, int width, int height)
         {
             UIImage croppedImage = null;
+
             await Task.Run(() =>
             {
                 using (var resizedImage = MaxResizeImage(image, width, height))
@@ -22,6 +23,7 @@ namespace Plugin.CustomVisionEngine.Platforms.iOS
 
             return croppedImage;
         }
+
         // resize the image to be contained within a maximum width and height, keeping aspect ratio
         private static UIImage MaxResizeImage(UIImage sourceImage, float maxWidth, float maxHeight)
         {
