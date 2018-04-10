@@ -15,8 +15,6 @@ namespace CustomVisionCompanion.Services
     {
         private const string PREDICTION_KEY = nameof(PREDICTION_KEY);
         private const string PROJECT_ID = nameof(PROJECT_ID);
-        private const string HEIGHT = nameof(HEIGHT);
-        private const string WIDTH = nameof(WIDTH);
 
         private readonly ISettings settings;
 
@@ -35,18 +33,6 @@ namespace CustomVisionCompanion.Services
         {
             get => settings.GetValueOrDefault(PROJECT_ID, Constants.ProjectId);
             set => settings.AddOrUpdateValue(PROJECT_ID, value);
-        }
-
-        public int Width
-        {
-            get => settings.GetValueOrDefault(WIDTH, Constants.Width);
-            set => settings.AddOrUpdateValue(WIDTH, value);
-        }
-
-        public int Height
-        {
-            get => settings.GetValueOrDefault(HEIGHT, Constants.Height);
-            set => settings.AddOrUpdateValue(HEIGHT, value);
         }
     }
 }

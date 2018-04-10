@@ -11,9 +11,6 @@ namespace CustomVisionCompanion.Common
         public const string PredictionKey = "";
         public static Guid ProjectId = new Guid("");
 
-        public const int Width = 227;
-        public const int Height = 227;
-
         public const string MainPage = nameof(MainPage);
 
         public const string AppName = "Custom Vision Companion";
