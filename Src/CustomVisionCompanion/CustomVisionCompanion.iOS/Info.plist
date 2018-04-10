@@ -15,12 +15,13 @@
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>10.3</string>
 	<key>CFBundleDisplayName</key>
 	<string>Custom Vision Companion</string>
 	<key>CFBundleIdentifier</key>
@@ -53,7 +54,5 @@
 	<string>CustomVisionCompanion wants to acces your Camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>CustomVisionCompanion wants to acces your Photo Library</string>
-	<key>UIRequiresFullScreen</key>
-	<true/>
 </dict>
 </plist>

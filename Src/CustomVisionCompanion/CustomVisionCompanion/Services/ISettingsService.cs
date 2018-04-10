@@ -11,9 +11,5 @@ namespace CustomVisionCompanion.Services
         string PredictionKey { get; set; }
 
         Guid ProjectId { get; set; }
-
-        int Width { get; set; }
-
-        int Height  { get; set; }
     }
 }
