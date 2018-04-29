@@ -17,7 +17,7 @@ namespace Plugin.CustomVisionEngine.Platforms.Android
                     return 0.0f;
 
                 case ModelType.General:
-                case ModelType.Landscape:
+                case ModelType.Landmarks:
                 default:
                     return 123.0f;
             }
@@ -31,7 +31,7 @@ namespace Plugin.CustomVisionEngine.Platforms.Android
                     return 0.0f;
 
                 case ModelType.General:
-                case ModelType.Landscape:
+                case ModelType.Landmarks:
                 default:
                     return 117.0f;
             }
@@ -45,7 +45,7 @@ namespace Plugin.CustomVisionEngine.Platforms.Android
                     return 0.0f;
 
                 case ModelType.General:
-                case ModelType.Landscape:
+                case ModelType.Landmarks:
                 default:
                     return 104.0f;
             }

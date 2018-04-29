@@ -9,7 +9,7 @@ namespace Plugin.CustomVisionEngine.Models
     public enum ModelType
     {
         General,
-        Landscape,
+        Landmarks,
         Retail
     }
 }
