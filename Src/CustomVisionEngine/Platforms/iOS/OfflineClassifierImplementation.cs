@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using CoreGraphics;
 using CoreML;
 using Foundation;
+using Plugin.CustomVisionEngine.Exceptions;
 using Plugin.CustomVisionEngine.Models;
 using Plugin.CustomVisionEngine.Platforms.iOS;
-using Plugin.CustomVisionEngine.Shared.Models;
 using UIKit;
 using Vision;
 

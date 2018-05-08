@@ -1,19 +1,18 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Plugin.Permissions;
 using Acr.UserDialogs;
 using Plugin.CustomVisionEngine;
 using Plugin.CustomVisionEngine.Models;
+using Plugin.Permissions;
 
 namespace CustomVisionCompanion.Droid
 {
-    [Activity(Label = "CustomVisionCompanion", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Custom Vision Companion", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)

@@ -1,6 +1,5 @@
 ﻿using CustomVisionCompanion.Common;
 using CustomVisionCompanion.Services;
-using Microsoft.Cognitive.CustomVision.Prediction;
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
