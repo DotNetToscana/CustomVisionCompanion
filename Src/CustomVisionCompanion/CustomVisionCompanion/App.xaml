@@ -2,21 +2,15 @@
 <Application
     x:Class="CustomVisionCompanion.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:CustomVisionCompanion.Converters"
-    xmlns:resources="clr-namespace:CustomVisionCompanion.Common">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Application.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Common/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <vm:ViewModelLocator xmlns:vm="clr-namespace:CustomVisionCompanion.ViewModels" x:Key="Locator" />
-
-            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
-            <converters:StreamToImageSourceConverter x:Key="StreamToImageSourceConverter" />
         </ResourceDictionary>
 
     </Application.Resources>
