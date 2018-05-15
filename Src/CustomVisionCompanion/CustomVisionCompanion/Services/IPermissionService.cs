@@ -11,7 +11,7 @@ namespace CustomVisionCompanion.Services
     {
         Task<PermissionStatus> CheckAsync(Permission permissions, string permissionRequestRationaleMessage = null);
 
-        Task<Dictionary<Permission, PermissionStatus>> ChechMultipleAsync(string permissionRequestRationaleMessage, params Permission[] permissions);
+        Task<Dictionary<Permission, PermissionStatus>> CheckMultipleAsync(string permissionRequestRationaleMessage, params Permission[] permissions);
 
         Task<Dictionary<Permission, PermissionStatus>> CheckMultipleAsync(params Permission[] permissions);
     }

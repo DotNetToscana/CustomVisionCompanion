@@ -20,11 +20,6 @@ namespace CustomVisionCompanion.Services
             this.dialogService = dialogService;
         }
 
-        public Task<Dictionary<Permission, PermissionStatus>> ChechMultipleAsync(string permissionRequestRationaleMessage, params Permission[] permissions)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<PermissionStatus> CheckAsync(Permission permissionType, string permissionRequestRationaleMessage = null)
         {
             var status = PermissionStatus.Denied;
