@@ -1,26 +1,56 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?Mapping compile="true"              ?>
 <ResourceDictionary
-    x:Class="CustomVisionCompanion.Common.Styles"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    xmlns:sys="clr-namespace:System;assembly=netstandard">
+
+    <Color x:Key="DefaultColor">#0078D7</Color>
+    <Color x:Key="StatusBarColor">#0063AD</Color>
+    <Color x:Key="MainContentBackgroundColor">#F5F5F5</Color>
+    <Color x:Key="MenuBackgroundColor">White</Color>
+    <Color x:Key="TextColorWithDarkBackground">White</Color>
+    <Color x:Key="TextColorWithLightBackground">Black</Color>
 
     <Style TargetType="NavigationPage">
-        <Setter Property="BarBackgroundColor" Value="#1E90FF" />
-        <Setter Property="BarTextColor" Value="White" />
+        <Setter Property="BarBackgroundColor" Value="{StaticResource DefaultColor}" />
+        <Setter Property="BarTextColor" Value="{StaticResource TextColorWithDarkBackground}" />
+    </Style>
+
+    <Style x:Key="MasterGridStyle" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{StaticResource MainContentBackgroundColor}" />
+        <Setter Property="RowSpacing" Value="0" />
+    </Style>
+
+    <Style x:Key="ContentGridStyle" TargetType="Grid">
+        <Setter Property="Padding" Value="16,16,16,16" />
+        <Setter Property="Margin">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="UWP">16,0,0,0</On>
+                    <On Platform="Android, iOS">0,0,0,0</On>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="TextColor" Value="{StaticResource TextColorWithLightBackground}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style TargetType="Switch">
+        <Setter Property="WidthRequest" Value="50" />
     </Style>
 
     <Style x:Key="SwitchLabelStyle" TargetType="Label">
-        <Setter Property="TextColor" Value="#272727" />
+        <Setter Property="TextColor" Value="{StaticResource TextColorWithLightBackground}" />
         <Setter Property="FontSize">
             <Setter.Value>
                 <OnPlatform x:TypeArguments="x:Double" iOS="10" />
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 
     <Style TargetType="ListView">
@@ -30,4 +60,25 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{DynamicResource DefaultColor}" />
+        <Setter Property="HorizontalOptions">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="LayoutOptions">
+                    <On Platform="Android, iOS">CenterAndExpand</On>
+                    <On Platform="UWP">FillAndExpand</On>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalOptions">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="LayoutOptions">
+                    <On Platform="Android, iOS">CenterAndExpand</On>
+                    <On Platform="UWP">FillAndExpand</On>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
+

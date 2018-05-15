@@ -67,12 +67,6 @@ namespace CustomVisionCompanion.Services
                 {
                     navigation.RemovePage(existingPages[i]);
                 }
-
-                //var startStackPoint = existingPages.Count - 1;
-                //for (var i = startStackPoint; i > startStackPoint - clearStackLevel; i--)
-                //{
-                //    navigation.RemovePage(existingPages[i]);
-                //}
             }
         }
 
