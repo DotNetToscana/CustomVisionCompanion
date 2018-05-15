@@ -57,7 +57,7 @@
             <Image
                 Margin="12"
                 Aspect="AspectFit"
-                Source="{Binding Image, Converter={StaticResource StreamToImageSourceConverter}}"
+                Source="{Binding ImagePath}"
                 VerticalOptions="Start" />
         </StackLayout>
 

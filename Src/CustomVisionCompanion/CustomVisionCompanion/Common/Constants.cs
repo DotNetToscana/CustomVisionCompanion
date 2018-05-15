@@ -9,10 +9,6 @@ namespace CustomVisionCompanion.Common
     public static class Constants
     {
         public const string PredictionKey = "";
-        public static Guid ProjectId = new Guid("");
-
-        public const string MainPage = nameof(MainPage);
-
-        public const string AppName = "Custom Vision Companion";
+        public static Guid ProjectId = Guid.Empty;
     }
 }

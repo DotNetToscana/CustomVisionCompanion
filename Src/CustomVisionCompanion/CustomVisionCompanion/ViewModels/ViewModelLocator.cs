@@ -17,15 +17,10 @@ namespace CustomVisionCompanion.ViewModels
     {
         static ViewModelLocator()
         {
-            var navigationService = new NavigationService();
-            navigationService.Configure(Constants.MainPage, typeof(MainPage));
-
-            SimpleIoc.Default.Register<NavigationService>(() => navigationService);
 
             SimpleIoc.Default.Register<IUserDialogs>(() => UserDialogs.Instance);
-            SimpleIoc.Default.Register<ISettingsService, SettingsService>();
-            SimpleIoc.Default.Register<IPermissions>(() => CrossPermissions.Current);
-            SimpleIoc.Default.Register<IMedia>(() => CrossMedia.Current);
+            SimpleIoc.Default.Register<IPermissionService, PermissionService>();
+            SimpleIoc.Default.Register<IMediaService, MediaService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
         }

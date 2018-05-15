@@ -5,24 +5,17 @@ using Xamarin.Forms;
 using GalaSoft.MvvmLight.Command;
 using System.Threading.Tasks;
 using CustomVisionCompanion.Common;
-using CustomVisionCompanion.Services;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace CustomVisionCompanion.ViewModels
 {
-    public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase, INavigable
+    public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
-        protected NavigationService NavigationService { get; }
-
         protected IUserDialogs DialogService { get; }
-
-        protected ISettingsService SettingsService { get; }
 
         public ViewModelBase()
         {
-            NavigationService = SimpleIoc.Default.GetInstance<NavigationService>();
             DialogService = SimpleIoc.Default.GetInstance<IUserDialogs>();
-            SettingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
         }
 
         private bool isBusy;
@@ -58,13 +51,6 @@ namespace CustomVisionCompanion.ViewModels
             return isSet;
         }
 
-        private bool isActive;
-        public bool IsActive
-        {
-            get => isActive;
-            set => Set(ref isActive, value);
-        }
-
         protected virtual void OnIsBusyChanged()
         {
         }
@@ -77,16 +63,10 @@ namespace CustomVisionCompanion.ViewModels
         {
         }
 
-        protected async Task ShowErrorAsync(string message, Exception ex = null, bool goBack = false)
+        protected async Task ShowErrorAsync(string message, Exception ex = null)
         {
             DialogService.HideLoading();
-
             await DialogService.AlertAsync(message);
-
-            if (goBack)
-            {
-                NavigationService.GoBack();
-            }
         }
     }
 }
