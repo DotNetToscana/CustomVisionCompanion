@@ -5,6 +5,8 @@ using Foundation;
 using Plugin.CustomVisionEngine;
 using Plugin.CustomVisionEngine.Models;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace CustomVisionCompanion.iOS
 {
@@ -25,6 +27,22 @@ namespace CustomVisionCompanion.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            //var resources = Xamarin.Forms.Application.Current.Resources;
+            //var defaultColor = ((Color)resources["DefaultColor"]).ToUIColor();
+            //var statusBarColor = ((Color)resources["StatusBarColor"]).ToUIColor();
+
+            //var statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
+            //if (statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))
+            //{
+            //    statusBar.BackgroundColor = statusBarColor;
+            //}
+
+            //UISwitch.Appearance.OnTintColor = defaultColor;
+            //if (UIApplication.SharedApplication.KeyWindow != null)
+            //{
+            //    UIApplication.SharedApplication.KeyWindow.TintColor = defaultColor;
+            //}
 
             var task = CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "Computer");
 

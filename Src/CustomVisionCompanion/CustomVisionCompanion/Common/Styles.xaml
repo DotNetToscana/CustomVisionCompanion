@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<?Mapping compile="true"                    ?>
-<ResourceDictionary
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:sys="clr-namespace:System;assembly=netstandard">
-
+<?Mapping compile="true"   ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="DefaultColor">#0078D7</Color>
     <Color x:Key="StatusBarColor">#0063AD</Color>
     <Color x:Key="MainContentBackgroundColor">#F5F5F5</Color>
-    <Color x:Key="MenuBackgroundColor">White</Color>
     <Color x:Key="TextColorWithDarkBackground">White</Color>
     <Color x:Key="TextColorWithLightBackground">Black</Color>
 
@@ -54,11 +49,13 @@
     </Style>
 
     <Style TargetType="ListView">
-        <Setter Property="SeparatorVisibility">
+        <Setter Property="BackgroundColor" Value="{StaticResource MainContentBackgroundColor}" />
+        <Setter Property="Footer" Value="" />
+        <!--<Setter Property="SeparatorVisibility">
             <Setter.Value>
                 <OnPlatform x:TypeArguments="SeparatorVisibility" iOS="None" />
             </Setter.Value>
-        </Setter>
+        </Setter>-->
     </Style>
 
     <Style TargetType="ActivityIndicator">
