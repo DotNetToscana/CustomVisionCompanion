@@ -12,10 +12,11 @@
             Command="{Binding TakePhotoCommand}"
             Order="Primary"
             Priority="0"
-            Text="Take pohoto">
+            Text="Take photo">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="Android, iOS">take_photo.png</On>
+                    <On Platform="Android">ic_action_photo_camera.png</On>
+                    <On Platform="iOS">Images/photo_camera.png</On>
                     <On Platform="UWP">Assets/AppBar/TakePhoto.png</On>
                 </OnPlatform>
             </ToolbarItem.Icon>
@@ -27,16 +28,17 @@
             Text="Pick photo">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="Android, iOS">pick_photo.png</On>
+                    <On Platform="Android">ic_action_photo_library.png</On>
+                    <On Platform="iOS">Images/photo_library.png</On>
                     <On Platform="UWP">Assets/AppBar/PickPhoto.png</On>
                 </OnPlatform>
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <Grid>
+    <Grid Style="{StaticResource MasterGridStyle}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="180" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -55,7 +57,7 @@
             <Image
                 Margin="12"
                 Aspect="AspectFit"
-                Source="{Binding Image, Converter={StaticResource StreamToImageSourceConverter}}"
+                Source="{Binding ImagePath}"
                 VerticalOptions="Start" />
         </StackLayout>
 

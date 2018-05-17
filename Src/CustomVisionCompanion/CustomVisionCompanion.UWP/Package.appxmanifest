@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="975fdb98-45f8-4d3b-be44-e5c4c51625cf"
-    Publisher="CN=894c2190-818d-4452-abcb-db558824f7ad"
+    Name="758c003c-3ddc-4e76-9237-e1988c14bd2e"
+    Publisher="CN=0aaa0794-2944-443a-9e5f-e4c36aeec1c4"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>CustomVisionCompanion.UWP</DisplayName>
-    <PublisherDisplayName>894c2190-818d-4452-abcb-db558824f7ad</PublisherDisplayName>
+    <PublisherDisplayName>0aaa0794-2944-443a-9e5f-e4c36aeec1c4</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -37,7 +37,13 @@
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="CustomVisionCompanion.UWP"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>

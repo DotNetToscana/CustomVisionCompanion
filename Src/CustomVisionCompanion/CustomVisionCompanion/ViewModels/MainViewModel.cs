@@ -1,6 +1,5 @@
 ﻿using CustomVisionCompanion.Common;
 using CustomVisionCompanion.Services;
-using Microsoft.Cognitive.CustomVision.Prediction;
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -14,13 +13,13 @@ using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Plugin.CustomVisionEngine;
 using Plugin.CustomVisionEngine.Models;
+using GalaSoft.MvvmLight.Command;
 
 namespace CustomVisionCompanion.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly IMedia mediaService;
-        private readonly IPermissions permissionsService;
+        private readonly IMediaService mediaService;
 
         private IEnumerable<string> predictions;
         public IEnumerable<string> Predictions
@@ -36,127 +35,42 @@ namespace CustomVisionCompanion.ViewModels
             set => Set(ref isOffline, value);
         }
 
-        private Stream image;
-        public Stream Image
+        private string imagePath;
+        public string ImagePath
         {
-            get => image;
-            set => Set(ref image, value);
+            get => imagePath;
+            set => Set(ref imagePath, value);
         }
 
-        public AutoRelayCommand TakePhotoCommand { get; private set; }
+        public RelayCommand TakePhotoCommand { get; private set; }
 
-        public AutoRelayCommand PickPhotoCommand { get; private set; }
+        public RelayCommand PickPhotoCommand { get; private set; }
 
-        public MainViewModel(IPermissions permissionsService, IMedia mediaService)
+        public MainViewModel(IMediaService mediaService)
         {
             this.mediaService = mediaService;
-            this.permissionsService = permissionsService;
 
             CreateCommands();
         }
 
         private void CreateCommands()
         {
-            TakePhotoCommand = new AutoRelayCommand(async () => await TakePhotoAsync(), () => !IsBusy).DependsOn(nameof(IsBusy));
-            PickPhotoCommand = new AutoRelayCommand(async () => await PickPhotoAsync(), () => !IsBusy).DependsOn(nameof(IsBusy));
+            TakePhotoCommand = new RelayCommand(async () => await AnalyzePhotoAsync(() => mediaService.TakePhotoAsync()));
+            PickPhotoCommand = new RelayCommand(async () => await AnalyzePhotoAsync(() => mediaService.PickPhotoAsync()));
         }
 
-        private async Task TakePhotoAsync()
-        {
-            await AnalyzeAsync(Permission.Camera, async () =>
-            {
-                // Take a photo using the camera.
-                var file = await mediaService.TakePhotoAsync(new StoreCameraMediaOptions
-                {
-                    SaveToAlbum = false,
-                    PhotoSize = PhotoSize.MaxWidthHeight,
-                    AllowCropping = false,
-                    MaxWidthHeight = 1920,
-                    CompressionQuality = 85
-                });
-
-                return file;
-            });
-        }
-
-        private async Task PickPhotoAsync()
-        {
-            await AnalyzeAsync(Permission.Photos, async () =>
-            {
-                // Pick a photo from the gallery.
-                var file = await mediaService.PickPhotoAsync();
-
-                return file;
-            });
-        }
-
-        private async Task AnalyzeAsync(Permission permissionType, Func<Task<MediaFile>> GetImageAsync)
+        private async Task AnalyzePhotoAsync(Func<Task<MediaFile>> action)
         {
             IsBusy = true;
 
             try
             {
-                var status = PermissionStatus.Granted;
-
-                // Only on iOS we need to explicitly checks for permission.
-                // On Android, if users are running Marshmallow the Media Plugin will automatically prompt them for runtime permissions.
-                if (Device.RuntimePlatform == Device.iOS)
-                {
-                    status = await permissionsService.CheckPermissionStatusAsync(permissionType);
-                    if (status != PermissionStatus.Granted)
-                    {
-                        if (await permissionsService.ShouldShowRequestPermissionRationaleAsync(permissionType))
-                        {
-                            await DialogService.AlertAsync($"This app needs access to {permissionType}, please accept the request.", Constants.AppName);
-                        }
-
-                        var results = await permissionsService.RequestPermissionsAsync(permissionType);
-
-                        //Best practice to always check that the key exists
-                        if (results.ContainsKey(permissionType))
-                        {
-                            status = results[permissionType];
-                        }
-                    }
-                }
-
-                if (status == PermissionStatus.Granted)
+                var file = await action.Invoke();
+                if (file != null)
                 {
                     // Clean up previous results.
-                    CleanUp();
-
-                    await mediaService.Initialize();
-
-                    try
-                    {
-                        var file = await GetImageAsync();
-                        await AnalyzePhotoAsync(file);
-                    }
-                    catch (MediaPermissionException)
-                    {
-                        await DialogService.AlertAsync($"You need to allow {permissionType} access in order to use the app.", Constants.AppName);
-                    }
-                }
-                else if (status != PermissionStatus.Unknown)
-                {
-                    await DialogService.AlertAsync("Cannot continue, check app settings for the right permission.", Constants.AppName);
-                }
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        private async Task AnalyzePhotoAsync(MediaFile file)
-        {
-            if (file != null)
-            {
-                IsBusy = true;
-
-                try
-                {
-                    Image = file.GetStream();
+                    Predictions = null;
+                    ImagePath = file.Path;
 
                     // Check whether to use the online or offline version of the prediction model.
                     IEnumerable<Recognition> predictionsRecognized = null;
@@ -168,28 +82,21 @@ namespace CustomVisionCompanion.ViewModels
                     else
                     {
                         var classifier = CrossOnlineClassifier.Current;
-                        predictionsRecognized = await classifier.RecognizeAsync(SettingsService.PredictionKey, SettingsService.ProjectId, file.GetStream());
+                        predictionsRecognized = await classifier.RecognizeAsync(Constants.PredictionKey, Constants.ProjectId, file.GetStream());
                     }
 
                     Predictions = predictionsRecognized.Select(p => $"{p.Tag}: {p.Probability:P1}");
                     file.Dispose();
                 }
-                catch (Exception ex)
-                {
-                    await DialogService.AlertAsync(ex.Message);
-                }
-                finally
-                {
-                    IsBusy = false;
-                }
             }
-        }
-
-        private void CleanUp()
-        {
-            Predictions = null;
-            Image?.Dispose();
-            Image = null;
+            catch (Exception ex)
+            {
+                await DialogService.AlertAsync(ex.Message);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

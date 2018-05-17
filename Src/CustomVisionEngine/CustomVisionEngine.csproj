@@ -1,7 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;MonoAndroid80;Xamarin.iOS10;uap10.0.16299</TargetFrameworks>
+    <!--Work around so the conditions work below-->
+    <TargetFrameworks></TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81</TargetFrameworks>
     <AssemblyName>Plugin.CustomVisionEngine</AssemblyName>
     <RootNamespace>Plugin.CustomVisionEngine</RootNamespace>
     <PackageId>Plugin.CustomVisionEngine</PackageId>
@@ -13,12 +16,12 @@
     <PackageVersion>1.0.0.0</PackageVersion>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
-    <LangVersion>default</LangVersion>
     <DefineConstants>$(DefineConstants);</DefineConstants>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
+
     <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+    <LangVersion>latest</LangVersion>
 
     <!--TODO: Fill these in-->
     <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
@@ -37,87 +40,40 @@
     <Copyright>Copyright 2018</Copyright>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DocumentationFile />
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <DocumentationFile />
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DebugType>pdbonly</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.3.0" PrivateAssets="All" />
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.5.4" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <Compile Include="Shared\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.8" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.4" />
     <Compile Include="Platforms\UWP\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00194" />
     <ProjectReference Include="..\TensorFlowXamarin\TensorFlowXamarin.csproj" />
     <Compile Include="Platforms\Android\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
     <Compile Include="Platforms\iOS\**\*.cs" />
   </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0">
-    </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.11">
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'uap10.0.16299'">
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0">
-    </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10">
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0">
-    </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10">
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0">
-    </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10">
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Shared\CrossOfflineClassifier.cs" />
-    <None Remove="Shared\CrossOnlineClassifier.cs" />
-    <None Remove="Shared\IOfflineClassifier.cs" />
-    <None Remove="Shared\IOnlineClassifier.cs" />
-    <None Remove="Shared\Models\ClassifierException.cs" />
-    <None Remove="Shared\Models\ModelType.cs" />
-    <None Remove="Shared\OnlineClassifierImplementation.cs" />
-  </ItemGroup>
-
-  <!--
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <Compile Include="Platforms\DotNet\**\*.cs" />
-  </ItemGroup>
-  -->
-
-  <!--
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Compile Include="Platforms\DotNet\**\*.cs" />
-  </ItemGroup>
-  -->
 
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>
