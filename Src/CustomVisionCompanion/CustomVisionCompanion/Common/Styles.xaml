@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<?Mapping compile="true"   ?>
+<?Mapping compile="true"    ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="DefaultColor">#0078D7</Color>
     <Color x:Key="StatusBarColor">#0063AD</Color>
     <Color x:Key="MainContentBackgroundColor">#F5F5F5</Color>
     <Color x:Key="TextColorWithDarkBackground">White</Color>
     <Color x:Key="TextColorWithLightBackground">Black</Color>
+
+    <Style ApplyToDerivedTypes="True" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource MainContentBackgroundColor}" />
+    </Style>
 
     <Style TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{StaticResource DefaultColor}" />
@@ -40,11 +44,6 @@
 
     <Style x:Key="SwitchLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextColorWithLightBackground}" />
-        <Setter Property="FontSize">
-            <Setter.Value>
-                <OnPlatform x:TypeArguments="x:Double" iOS="10" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 

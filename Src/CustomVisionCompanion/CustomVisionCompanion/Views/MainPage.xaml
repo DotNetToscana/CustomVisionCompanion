@@ -28,7 +28,7 @@
             Text="Pick photo">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="Android, iOS">ic_action_photo_library.png</On>
+                    <On Platform="Android">ic_action_photo_library.png</On>
                     <On Platform="iOS">Images/photo_library.png</On>
                     <On Platform="UWP">Assets/AppBar/PickPhoto.png</On>
                 </OnPlatform>

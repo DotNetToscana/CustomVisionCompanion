@@ -23,7 +23,7 @@
     <key>MinimumOSVersion</key>
     <string>10.3</string>
     <key>CFBundleDisplayName</key>
-    <string>Custom Vision Companion</string>
+    <string>Custom Vision</string>
     <key>CFBundleIdentifier</key>
     <string>org.dotnettoscana.customvisioncompanion</string>
     <key>CFBundleVersion</key>
@@ -31,12 +31,16 @@
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>CFBundleName</key>
-    <string>Custom Vision Companion</string>
+    <string>Custom Vision</string>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
     <key>NSCameraUsageDescription</key>
-    <string>CustomVisionCompanion wants to acces your Camera</string>
+    <string>Custom Vision Companion wants to acces your Camera</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>CustomVisionCompanion wants to acces your Photo Library</string>
+    <string>Custom Vision Companion wants to acces your Photo Library</string>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+    <key>UIStatusBarStyle</key>
+    <string>UIStatusBarStyleBlackOpaque</string>
   </dict>
 </plist>
