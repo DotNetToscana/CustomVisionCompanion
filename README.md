@@ -32,7 +32,7 @@ xcrun coremlcompiler compile {model.mlmodel} {outputFolder}
 
 2. Put the output folder in the [Resources](https://github.com/DotNetToscana/CustomVisionCompanion/tree/master/Src/CustomVisionCompanion/CustomVisionCompanion.iOS/Resources/Computer.mlmodelc) folder. Be sure that the Build Action of each file must be set to *BundleResource*.
 
-- Add the following line in the [FinishedLaunching](https://github.com/DotNetToscana/CustomVisionCompanion/blob/master/Src/CustomVisionCompanion/CustomVisionCompanion.Android/MainActivity.cs#L30) method in *AppDelegate.cs*:
+- Add the following line in the [FinishedLaunching](https://github.com/DotNetToscana/CustomVisionCompanion/blob/master/Src/CustomVisionCompanion/CustomVisionCompanion.iOS/AppDelegate.cs#L47) method in *AppDelegate.cs*:
 
 ```
 CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "Computer");
