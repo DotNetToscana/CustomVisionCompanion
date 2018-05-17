@@ -30,7 +30,7 @@ CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "model.pb", "l
 xcrun coremlcompiler compile {model.mlmodel} {outputFolder}
 ```
 
-2. Put the output folder in the [Resources](https://github.com/DotNetToscana/CustomVisionCompanion/tree/master/Src/CustomVisionCompanion/CustomVisionCompanion.iOS/Resources/Computer.mlmodelc) folder. Be sure that the Build Action of each file must be set to *BundleResource*.
+2. Put the output folder inside the [Resources](https://github.com/DotNetToscana/CustomVisionCompanion/tree/master/Src/CustomVisionCompanion/CustomVisionCompanion.iOS/Resources) folder. Be sure that the Build Action of each file must be set to *BundleResource*.
 
 - Add the following line in the [FinishedLaunching](https://github.com/DotNetToscana/CustomVisionCompanion/blob/master/Src/CustomVisionCompanion/CustomVisionCompanion.iOS/AppDelegate.cs#L47) method in *AppDelegate.cs*:
 
