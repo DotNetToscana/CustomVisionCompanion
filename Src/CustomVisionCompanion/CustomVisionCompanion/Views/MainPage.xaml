@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<common:ContentPageBase
     x:Class="CustomVisionCompanion.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common="clr-namespace:CustomVisionCompanion.Common"
     xmlns:local="clr-namespace:CustomVisionCompanion"
     Title="Custom Vision Companion"
     BindingContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}">
@@ -34,6 +35,11 @@
                 </OnPlatform>
             </ToolbarItem.Icon>
         </ToolbarItem>
+        <ToolbarItem
+            Command="{Binding SettingsCommand}"
+            Order="Secondary"
+            Priority="0"
+            Text="Settings..." />
     </ContentPage.ToolbarItems>
 
     <Grid Style="{StaticResource MasterGridStyle}">
@@ -97,4 +103,4 @@
             </ActivityIndicator.VerticalOptions>
         </ActivityIndicator>
     </Grid>
-</ContentPage>
+</common:ContentPageBase>

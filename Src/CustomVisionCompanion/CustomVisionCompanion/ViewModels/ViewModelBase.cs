@@ -6,16 +6,25 @@ using GalaSoft.MvvmLight.Command;
 using System.Threading.Tasks;
 using CustomVisionCompanion.Common;
 using GalaSoft.MvvmLight.Ioc;
+using CustomVisionCompanion.Services;
 
 namespace CustomVisionCompanion.ViewModels
 {
-    public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase
+    public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase, INavigable
     {
+        protected NavigationService NavigationService { get; }
+
+        protected ISettingsService SettingsService { get; }
+
         protected IUserDialogs DialogService { get; }
+
+        public bool IsActive { get; set; }
 
         public ViewModelBase()
         {
+            NavigationService = SimpleIoc.Default.GetInstance<NavigationService>();
             DialogService = SimpleIoc.Default.GetInstance<IUserDialogs>();
+            SettingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
         }
 
         private bool isBusy;

@@ -11,6 +11,8 @@ namespace CustomVisionCompanion
 {
 	public partial class App : Application
 	{
+        public static bool IsPausing { get; set; }
+
         public App ()
 		{
 			InitializeComponent();

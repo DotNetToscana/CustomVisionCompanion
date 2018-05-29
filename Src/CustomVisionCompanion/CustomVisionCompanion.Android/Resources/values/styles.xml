@@ -39,11 +39,18 @@
     <item name="windowActionModeOverlay">true</item>
 
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:listViewStyle">@style/ListViewStyle</item>
     <item name="android:colorActivatedHighlight">@android:color/transparent</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorControlNormal">@color/colorPrimary</item>
+    <item name="colorControlActivated">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+  </style>
+
+  <style name="ListViewStyle" parent="@android:style/Widget.ListView">
+    <item name="android:listSelector">@android:color/transparent</item>
   </style>
 
   <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">

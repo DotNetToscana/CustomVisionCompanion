@@ -160,7 +160,10 @@
       <Version>5.4.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
-      <Version>3.2.1</Version>
+      <Version>4.0.0.9</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Settings">
+      <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
   </ItemGroup>
@@ -180,5 +183,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Images\photo_library.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images\open_in_browser.png" />
   </ItemGroup>
 </Project>
