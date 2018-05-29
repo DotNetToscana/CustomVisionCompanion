@@ -6,7 +6,7 @@ A Xamarin.Forms app showcasing how to use Custom Vision Service with either onli
 
 **Getting started**
 
-To use an online model, go to the Settings page and set *Prediction Key* and *Project Id* from Custom Vision Service Project Settings.
+To use an online model, launch the app, go to the Settings page and then set *Prediction Key* and *Project Id* from Custom Vision Service Project Settings.
 
 The sample contains an offline model exported from Custom Vision Service, either for [Android](https://github.com/DotNetToscana/CustomVisionCompanion/tree/master/Src/CustomVisionCompanion/CustomVisionCompanion.Android/Assets) and [iOS](https://github.com/DotNetToscana/CustomVisionCompanion/blob/master/Src/CustomVisionCompanion/CustomVisionCompanion.iOS/Computer.mlmodel). It has been trained to recognize laptop, keboard and mouse. It isn't much accurate, but you can easily replace it with your own. You just need to download the model from [Custom Vision Service Portal](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/export-your-model).
 
