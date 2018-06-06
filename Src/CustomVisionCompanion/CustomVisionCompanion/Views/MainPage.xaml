@@ -85,22 +85,8 @@
         </ListView>
 
         <ActivityIndicator
-            x:Name="Waiting"
             Grid.ColumnSpan="2"
             IsRunning="{Binding IsBusy}"
-            IsVisible="{Binding IsBusy}">
-            <ActivityIndicator.HorizontalOptions>
-                <OnPlatform x:TypeArguments="LayoutOptions">
-                    <On Platform="Android, iOS">CenterAndExpand</On>
-                    <On Platform="UWP">FillAndExpand</On>
-                </OnPlatform>
-            </ActivityIndicator.HorizontalOptions>
-            <ActivityIndicator.VerticalOptions>
-                <OnPlatform x:TypeArguments="LayoutOptions">
-                    <On Platform="Android, iOS">CenterAndExpand</On>
-                    <On Platform="UWP">FillAndExpand</On>
-                </OnPlatform>
-            </ActivityIndicator.VerticalOptions>
-        </ActivityIndicator>
+            IsVisible="{Binding IsBusy}" />
     </Grid>
 </common:ContentPageBase>
