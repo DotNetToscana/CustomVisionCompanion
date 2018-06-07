@@ -28,7 +28,7 @@ namespace CustomVisionCompanion.Droid
             UserDialogs.Init(this);
             LoadApplication(new App());
 
-            var task = CrossOfflineClassifier.Current.InitializeAsync(ModelType.Landmarks, "model.pb", "labels.txt");
+            var task = CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "model.pb", "labels.txt");
         }
 
         protected override void OnPause()
