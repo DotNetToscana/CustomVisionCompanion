@@ -17,9 +17,6 @@ namespace Plugin.CustomVisionEngine
         private const int INPUT_HEIGHT = 227;
         private const string INPUT_NAME = "Placeholder";
         private const string OUTPUT_NAME = "loss";
-        private const string DATA_NORM_LAYER_PREFIX = "data_bn";
-
-        private bool hasNormalizationLayer = false;
 
         private List<String> labels;
         private TensorFlowInferenceInterface inferenceInterface;
@@ -39,54 +36,30 @@ namespace Plugin.CustomVisionEngine
             }
 
             inferenceInterface = new TensorFlowInferenceInterface(assets, modelFile);
-
-            var opIter = inferenceInterface.Graph().Operations();
-            while (opIter.HasNext)
-            {
-                var op = (Org.Tensorflow.Operation)opIter.Next();
-                System.Diagnostics.Debug.WriteLine(op.Name());
-
-                if (op.Name().Contains(DATA_NORM_LAYER_PREFIX))
-                {
-                    hasNormalizationLayer = true;
-                    break;
-                }
-            }
-
-            hasNormalizationLayer = true;
         }
 
         private IEnumerable<Recognition> Recognize(Bitmap bitmap)
         {
-            var outputNames = new string[] { OUTPUT_NAME };
-            var intValues = new int[INPUT_WIDTH * INPUT_HEIGHT];
-            var floatValues = new float[INPUT_WIDTH * INPUT_HEIGHT * 3];
+            var argbPixelArray = new int[INPUT_WIDTH * INPUT_HEIGHT];
+            var normalizedPixelComponents = new float[argbPixelArray.Length * 3];
 
-            bitmap.GetPixels(intValues, 0, bitmap.Width, 0, 0, bitmap.Width, bitmap.Height);
+            bitmap.GetPixels(argbPixelArray, 0, bitmap.Width, 0, 0, bitmap.Width, bitmap.Height);
 
-            var IMAGE_MEAN_R = 0.0f; ;
-            var IMAGE_MEAN_G = 0.0f; ;
-            var IMAGE_MEAN_B = 0.0f; ;
-
-            if (!hasNormalizationLayer)
+            for (var i = 0; i < argbPixelArray.Length; ++i)
             {
-                // This is an older model without mean normalization layer and needs to do mean subtraction.
-                IMAGE_MEAN_R = 124.0f;
-                IMAGE_MEAN_G = 117.0f;
-                IMAGE_MEAN_B = 105.0f;
+                var val = argbPixelArray[i];
+                normalizedPixelComponents[i * 3 + 0] = val & 0xFF;
+                normalizedPixelComponents[i * 3 + 1] = (val >> 8) & 0xFF;
+                normalizedPixelComponents[i * 3 + 2] = (val >> 16) & 0xFF;
             }
 
-            for (var i = 0; i < intValues.Length; ++i)
-            {
-                var val = intValues[i];
-                floatValues[i * 3 + 0] = (float)(val & 0xFF) - IMAGE_MEAN_B;
-                floatValues[i * 3 + 1] = (float)((val >> 8) & 0xFF) - IMAGE_MEAN_G;
-                floatValues[i * 3 + 2] = (float)((val >> 16) & 0xFF) - IMAGE_MEAN_R;
-            }
+            // Copy the input data into TF
+            inferenceInterface.Feed(INPUT_NAME, normalizedPixelComponents, 1, INPUT_WIDTH, INPUT_HEIGHT, 3);
 
-            inferenceInterface.Feed(INPUT_NAME, floatValues, 1, INPUT_WIDTH, INPUT_HEIGHT, 3);
-            inferenceInterface.Run(outputNames);
+            // Run the inference
+            inferenceInterface.Run(new[] { OUTPUT_NAME });
 
+            // Grab the output data
             var outputs = new float[labels.Count];
             inferenceInterface.Fetch(OUTPUT_NAME, outputs);
 
