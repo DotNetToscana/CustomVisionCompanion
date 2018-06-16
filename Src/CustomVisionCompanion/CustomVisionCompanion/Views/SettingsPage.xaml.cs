@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace CustomVisionCompanion.Views
 {
-	public partial class MainPage : ContentPageBase
+	public partial class SettingsPage : ContentPageBase
 	{
-		public MainPage()
+		public SettingsPage()
 		{
 			InitializeComponent();
         }

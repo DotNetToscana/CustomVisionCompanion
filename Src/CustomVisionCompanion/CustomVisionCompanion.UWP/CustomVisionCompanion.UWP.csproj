@@ -150,10 +150,13 @@
       <Version>5.4.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
-      <Version>3.2.1</Version>
+      <Version>4.0.0.9</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.4" />
+    <PackageReference Include="Xam.Plugins.Settings">
+      <Version>3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.530893" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CustomVisionEngine\CustomVisionEngine.csproj">

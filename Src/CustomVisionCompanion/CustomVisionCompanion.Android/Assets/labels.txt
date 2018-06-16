@@ -1,3 +1,5 @@
+controller
 keyboard
 laptop
+monitor
 mouse

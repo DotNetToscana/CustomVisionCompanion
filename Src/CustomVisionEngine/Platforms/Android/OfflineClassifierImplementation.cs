@@ -18,20 +18,11 @@ namespace Plugin.CustomVisionEngine
         private const string INPUT_NAME = "Placeholder";
         private const string OUTPUT_NAME = "loss";
 
-        private const float ImageStd = 1.0f;
-        private float ImageMeanR;
-        private float ImageMeanG;
-        private float ImageMeanB;
-
         private List<String> labels;
         private TensorFlowInferenceInterface inferenceInterface;
 
         public async Task InitializeAsync(ModelType modelType, params string[] parameters)
         {
-            ImageMeanR = modelType.ImageMeanR();
-            ImageMeanG = modelType.ImageMeanG();
-            ImageMeanB = modelType.ImageMeanB();
-
             var assets = Android.App.Application.Context.Assets;
             var modelFile = $"file:///android_asset/{parameters[0]}";
             var labelFile = parameters[1];
@@ -50,16 +41,16 @@ namespace Plugin.CustomVisionEngine
         private IEnumerable<Recognition> Recognize(Bitmap bitmap)
         {
             var argbPixelArray = new int[INPUT_WIDTH * INPUT_HEIGHT];
+            var normalizedPixelComponents = new float[argbPixelArray.Length * 3];
+
             bitmap.GetPixels(argbPixelArray, 0, bitmap.Width, 0, 0, bitmap.Width, bitmap.Height);
 
-            var normalizedPixelComponents = new float[argbPixelArray.Length * 3];
             for (var i = 0; i < argbPixelArray.Length; ++i)
             {
                 var val = argbPixelArray[i];
-
-                normalizedPixelComponents[i * 3 + 0] = ((val & 0xFF) - ImageMeanB) / ImageStd;
-                normalizedPixelComponents[i * 3 + 1] = (((val >> 8) & 0xFF) - ImageMeanG) / ImageStd;
-                normalizedPixelComponents[i * 3 + 2] = (((val >> 16) & 0xFF) - ImageMeanR) / ImageStd;
+                normalizedPixelComponents[i * 3 + 0] = val & 0xFF;
+                normalizedPixelComponents[i * 3 + 1] = (val >> 8) & 0xFF;
+                normalizedPixelComponents[i * 3 + 2] = (val >> 16) & 0xFF;
             }
 
             // Copy the input data into TF
@@ -94,7 +85,7 @@ namespace Plugin.CustomVisionEngine
 
             if (bitmap.Height != INPUT_HEIGHT || bitmap.Width != INPUT_WIDTH)
             {
-                using (var croppedBitmap = await ImageSharpImageUtilities.ResizeAndCropAsync(image, bitmap, INPUT_WIDTH, INPUT_HEIGHT))
+                using (var croppedBitmap = await NativeImageUtilities.ResizeAndCropAsync(image, bitmap, INPUT_WIDTH, INPUT_HEIGHT))
                 {
                     results = await Task.Run(() => Recognize(croppedBitmap));
                     croppedBitmap.Recycle();

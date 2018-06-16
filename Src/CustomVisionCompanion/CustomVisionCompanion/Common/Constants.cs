@@ -8,7 +8,9 @@ namespace CustomVisionCompanion.Common
 {
     public static class Constants
     {
-        public const string PredictionKey = "";
-        public static Guid ProjectId = Guid.Empty;
+        public static readonly Uri CustomVisionPortal = new Uri("https://customvision.ai");
+
+        public const string MainPage = nameof(MainPage);
+        public const string SettingsPage = nameof(SettingsPage);
     }
 }

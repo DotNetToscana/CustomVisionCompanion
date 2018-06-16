@@ -31,6 +31,12 @@ namespace CustomVisionCompanion.Droid
             var task = CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "model.pb", "labels.txt");
         }
 
+        protected override void OnPause()
+        {
+            App.IsPausing = true;
+            base.OnPause();
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);

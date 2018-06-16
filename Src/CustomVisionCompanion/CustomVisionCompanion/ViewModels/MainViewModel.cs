@@ -42,9 +42,11 @@ namespace CustomVisionCompanion.ViewModels
             set => Set(ref imagePath, value);
         }
 
-        public RelayCommand TakePhotoCommand { get; private set; }
+        public AutoRelayCommand TakePhotoCommand { get; private set; }
 
-        public RelayCommand PickPhotoCommand { get; private set; }
+        public AutoRelayCommand PickPhotoCommand { get; private set; }
+
+        public AutoRelayCommand SettingsCommand { get; private set; }
 
         public MainViewModel(IMediaService mediaService)
         {
@@ -55,8 +57,9 @@ namespace CustomVisionCompanion.ViewModels
 
         private void CreateCommands()
         {
-            TakePhotoCommand = new RelayCommand(async () => await AnalyzePhotoAsync(() => mediaService.TakePhotoAsync()));
-            PickPhotoCommand = new RelayCommand(async () => await AnalyzePhotoAsync(() => mediaService.PickPhotoAsync()));
+            TakePhotoCommand = new AutoRelayCommand(async () => await AnalyzePhotoAsync(() => mediaService.TakePhotoAsync()));
+            PickPhotoCommand = new AutoRelayCommand(async () => await AnalyzePhotoAsync(() => mediaService.PickPhotoAsync()));
+            SettingsCommand = new AutoRelayCommand(() => NavigationService.NavigateTo(Constants.SettingsPage));
         }
 
         private async Task AnalyzePhotoAsync(Func<Task<MediaFile>> action)
@@ -82,7 +85,7 @@ namespace CustomVisionCompanion.ViewModels
                     else
                     {
                         var classifier = CrossOnlineClassifier.Current;
-                        predictionsRecognized = await classifier.RecognizeAsync(Constants.PredictionKey, Constants.ProjectId, file.GetStream());
+                        predictionsRecognized = await classifier.RecognizeAsync(SettingsService.PredictionKey, Guid.Parse(SettingsService.ProjectId), file.GetStream());
                     }
 
                     Predictions = predictionsRecognized.Select(p => $"{p.Tag}: {p.Probability:P1}");
