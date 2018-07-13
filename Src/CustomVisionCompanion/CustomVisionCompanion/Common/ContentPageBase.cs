@@ -11,8 +11,6 @@ namespace CustomVisionCompanion.Common
 {
     public abstract class ContentPageBase : ContentPage
     {
-        public bool CancelsTouchesInView { get; set; } = true;
-
         public ContentPageBase()
         {
             On<iOS>().SetUseSafeArea(true);

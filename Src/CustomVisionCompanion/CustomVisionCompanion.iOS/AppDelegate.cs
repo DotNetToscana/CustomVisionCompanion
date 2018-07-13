@@ -38,7 +38,6 @@ namespace CustomVisionCompanion.iOS
 				statusBar.BackgroundColor = statusBarColor;
 			}
 
-			UISwitch.Appearance.OnTintColor = defaultColor;
 			if (UIApplication.SharedApplication.KeyWindow != null)
 			{
 				UIApplication.SharedApplication.KeyWindow.TintColor = defaultColor;

@@ -66,7 +66,6 @@
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00194" />
     <ProjectReference Include="..\TensorFlowXamarin\TensorFlowXamarin.csproj" />
     <Compile Include="Platforms\Android\**\*.cs" />
   </ItemGroup>

@@ -71,7 +71,8 @@
             Grid.Column="1"
             Margin="0,1,12,12"
             CachingStrategy="RecycleElementAndDataTemplate"
-            ItemsSource="{Binding Predictions}">
+            ItemsSource="{Binding Predictions}"
+            SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -82,9 +83,15 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="UWP">12,12,12,12</On>
+                    <On Platform="Android, iOS">0,1,12,12</On>
+                </OnPlatform>
+            </ListView.Margin>
         </ListView>
 
-        <ActivityIndicator
+        <ActivityIndicator WidthRequest="200"
             Grid.ColumnSpan="2"
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}" />
