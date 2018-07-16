@@ -3,7 +3,7 @@
   <PropertyGroup>
     <!--Work around so the conditions work below-->
     <TargetFrameworks></TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.17134</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81</TargetFrameworks>
     <AssemblyName>Plugin.CustomVisionEngine</AssemblyName>
     <RootNamespace>Plugin.CustomVisionEngine</RootNamespace>
@@ -24,20 +24,21 @@
     <LangVersion>latest</LangVersion>
 
     <!--TODO: Fill these in-->
-    <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>LINK TO PROJECT</PackageProjectUrl>
-    <RepositoryUrl>LINK TO PROJECT</RepositoryUrl>
-    <PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
-    <PackageIconUrl>ICON URL</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/DotNetToscana/CustomVisionCompanion/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/DotNetToscana/CustomVisionCompanion</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DotNetToscana/CustomVisionCompanion</RepositoryUrl>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIconUrl></PackageIconUrl>
     <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, CustomVisionEngine</PackageTags>
 
     <Title>CustomVisionEngine Plugin for Xamarin and Windows</Title>
     <Summary>Summary of nuget</Summary>
-    <Description>Plugin Description</Description>
+    <Description>A plug-in that allows to use Custom Vision service with online and offline models</Description>
 
     <Owners>YOU</Owners>
-    <Authors>YOU</Authors>
-    <Copyright>Copyright 2018</Copyright>
+    <Authors>Marco Minerva</Authors>
+    <Copyright>Copyright Marco Minerva 2018</Copyright>
+    <Company>Marco Minerva</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
@@ -66,7 +67,6 @@
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00194" />
     <ProjectReference Include="..\TensorFlowXamarin\TensorFlowXamarin.csproj" />
     <Compile Include="Platforms\Android\**\*.cs" />
   </ItemGroup>
@@ -75,5 +75,14 @@
     <Compile Include="Platforms\iOS\**\*.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Remove="Platforms\**" />
+    <None Remove="Platforms\**" />
+  </ItemGroup>
+
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+
+  <ItemGroup>
+    <_ResxFiles Remove="Platforms\**" />
+  </ItemGroup>
 </Project>

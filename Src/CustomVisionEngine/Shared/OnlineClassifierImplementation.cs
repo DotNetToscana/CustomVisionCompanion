@@ -14,14 +14,12 @@ namespace Plugin.CustomVisionEngine
 {
     public class OnlineClassifierImplementation : IOnlineClassifier
     {
-        public const string DefaultCustomVisionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v1.1/";
-
         private string predictionKey;
         private Guid projectId;
 
         private HttpClient client;
 
-        public Task InitializeAsync(string predictionKey, Guid projectId, string customVisionEndpoint = DefaultCustomVisionEndPoint)
+        public Task InitializeAsync(string predictionKey, Guid projectId, string customVisionEndpoint)
         {
             this.predictionKey = predictionKey;
             this.projectId = projectId;
@@ -51,7 +49,7 @@ namespace Plugin.CustomVisionEngine
             return results;
         }
 
-        public async Task<IEnumerable<Recognition>> RecognizeAsync(string predictionKey, Guid projectId, Stream image, Guid? iterationId = null, string customVisionEndpoint = DefaultCustomVisionEndPoint)
+        public async Task<IEnumerable<Recognition>> RecognizeAsync(string predictionKey, Guid projectId, Stream image, Guid? iterationId, string customVisionEndpoint)
         {
             await InitializeAsync(predictionKey, projectId, customVisionEndpoint);
             var results = await RecognizeAsync(image, iterationId);

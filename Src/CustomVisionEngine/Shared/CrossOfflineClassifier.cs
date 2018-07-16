@@ -7,7 +7,7 @@ namespace Plugin.CustomVisionEngine
     /// </summary>
     public static class CrossOfflineClassifier
     {
-        static Lazy<IOfflineClassifier> implementation = new Lazy<IOfflineClassifier>(() => CreateOfflineClassifier(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+        private static Lazy<IOfflineClassifier> implementation = new Lazy<IOfflineClassifier>(() => CreateOfflineClassifier(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
         /// Gets if the plugin is supported on the current platform.
@@ -34,8 +34,6 @@ namespace Plugin.CustomVisionEngine
         static IOfflineClassifier CreateOfflineClassifier()
         {
 #if NETSTANDARD1_0 || NETSTANDARD2_0
-            return null;
-#elif WINDOWS_UWP
             return null;
 #else
 #pragma warning disable IDE0022 // Use expression body for methods

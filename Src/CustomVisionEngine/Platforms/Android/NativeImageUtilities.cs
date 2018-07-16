@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Plugin.CustomVisionEngine.Platforms.Android
 {
-    public static class NativeImageUtilities
+    public static class ImageUtilities
     {
         public static async Task<Bitmap> ResizeAndCropAsync(System.IO.Stream image, Bitmap bitmap, int width, int height)
         {

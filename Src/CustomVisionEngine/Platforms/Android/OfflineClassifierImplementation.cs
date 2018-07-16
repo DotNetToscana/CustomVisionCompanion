@@ -85,7 +85,7 @@ namespace Plugin.CustomVisionEngine
 
             if (bitmap.Height != INPUT_HEIGHT || bitmap.Width != INPUT_WIDTH)
             {
-                using (var croppedBitmap = await NativeImageUtilities.ResizeAndCropAsync(image, bitmap, INPUT_WIDTH, INPUT_HEIGHT))
+                using (var croppedBitmap = await ImageUtilities.ResizeAndCropAsync(image, bitmap, INPUT_WIDTH, INPUT_HEIGHT))
                 {
                     results = await Task.Run(() => Recognize(croppedBitmap));
                     croppedBitmap.Recycle();
