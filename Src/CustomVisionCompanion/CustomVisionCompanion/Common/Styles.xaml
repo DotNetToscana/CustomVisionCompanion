@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<?Mapping compile="true"            ?>
+<?Mapping compile="true"                     ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="DefaultColor">#0078D7</Color>
     <Color x:Key="StatusBarColor">#0063AD</Color>
@@ -63,8 +63,22 @@
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{DynamicResource DefaultColor}" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="LayoutOptions">
+                    <On Platform="Android, iOS">CenterAndExpand</On>
+                    <On Platform="UWP">FillAndExpand</On>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalOptions">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="LayoutOptions">
+                    <On Platform="Android, iOS">CenterAndExpand</On>
+                    <On Platform="UWP">FillAndExpand</On>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
         <Setter Property="WidthRequest">
             <Setter.Value>
                 <OnPlatform x:TypeArguments="x:Double">

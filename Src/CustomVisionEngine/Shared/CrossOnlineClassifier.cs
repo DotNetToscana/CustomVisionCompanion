@@ -7,7 +7,7 @@ namespace Plugin.CustomVisionEngine
     /// </summary>
     public static class CrossOnlineClassifier
     {
-        static Lazy<IOnlineClassifier> implementation = new Lazy<IOnlineClassifier>(() => CreateOnlineClassifier(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+        private static Lazy<IOnlineClassifier> implementation = new Lazy<IOnlineClassifier>(() => CreateOnlineClassifier(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
         /// Gets if the plugin is supported on the current platform.
