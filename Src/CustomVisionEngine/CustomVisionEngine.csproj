@@ -75,14 +75,5 @@
     <Compile Include="Platforms\iOS\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Remove="Platforms\**" />
-    <None Remove="Platforms\**" />
-  </ItemGroup>
-
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
-
-  <ItemGroup>
-    <_ResxFiles Remove="Platforms\**" />
-  </ItemGroup>
 </Project>
