@@ -24,20 +24,21 @@
     <LangVersion>latest</LangVersion>
 
     <!--TODO: Fill these in-->
-    <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>LINK TO PROJECT</PackageProjectUrl>
-    <RepositoryUrl>LINK TO PROJECT</RepositoryUrl>
-    <PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
-    <PackageIconUrl>ICON URL</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/DotNetToscana/CustomVisionCompanion/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/DotNetToscana/CustomVisionCompanion</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DotNetToscana/CustomVisionCompanion</RepositoryUrl>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIconUrl></PackageIconUrl>
     <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, CustomVisionEngine</PackageTags>
 
     <Title>CustomVisionEngine Plugin for Xamarin and Windows</Title>
     <Summary>Summary of nuget</Summary>
-    <Description>Plugin Description</Description>
+    <Description>A plug-in that allows to use Custom Vision service with online and offline models</Description>
 
     <Owners>YOU</Owners>
-    <Authors>YOU</Authors>
-    <Copyright>Copyright 2018</Copyright>
+    <Authors>Marco Minerva</Authors>
+    <Copyright>Copyright Marco Minerva 2018</Copyright>
+    <Company>Marco Minerva</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">

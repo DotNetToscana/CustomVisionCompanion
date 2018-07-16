@@ -69,7 +69,6 @@
 
         <ListView
             Grid.Column="1"
-            Margin="0,1,12,12"
             CachingStrategy="RecycleElementAndDataTemplate"
             ItemsSource="{Binding Predictions}"
             SelectionMode="None">
@@ -91,7 +90,7 @@
             </ListView.Margin>
         </ListView>
 
-        <ActivityIndicator WidthRequest="200"
+        <ActivityIndicator
             Grid.ColumnSpan="2"
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}" />
