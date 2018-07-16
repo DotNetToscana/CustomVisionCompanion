@@ -28,26 +28,18 @@
         <ScrollView Style="{StaticResource ContentGridStyle}">
             <StackLayout>
                 <Label Style="{StaticResource CaptionLabelStyle}" Text="Prediction Key" />
-                <Entry Placeholder="Insert value" Text="{Binding PredictionKey}">
-                    <Entry.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="UWP">0,0,0,0</On>
-                            <On Platform="Android, iOS">0,-10,0,0</On>
-                        </OnPlatform>
-                    </Entry.Margin>
-                </Entry>
+                <Entry
+                    Placeholder="Insert value"
+                    Style="{StaticResource SettingsEntryStyle}"
+                    Text="{Binding PredictionKey}" />
                 <Label
                     Margin="0,10,0,0"
                     Style="{StaticResource CaptionLabelStyle}"
                     Text="Project Id" />
-                <Entry Placeholder="Insert value" Text="{Binding ProjectId}">
-                    <Entry.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="UWP">0,0,0,0</On>
-                            <On Platform="Android, iOS">0,-10,0,0</On>
-                        </OnPlatform>
-                    </Entry.Margin>
-                </Entry>
+                <Entry
+                    Placeholder="Insert value"
+                    Style="{StaticResource SettingsEntryStyle}"
+                    Text="{Binding ProjectId}" />
             </StackLayout>
         </ScrollView>
     </Grid>
