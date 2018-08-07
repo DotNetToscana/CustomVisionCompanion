@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<?Mapping compile="true"                       ?>
+<?Mapping compile="true"                         ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="DefaultColor">#0078D7</Color>
     <Color x:Key="StatusBarColor">#0063AD</Color>
@@ -59,6 +59,17 @@
                 <OnPlatform x:TypeArguments="SeparatorVisibility" iOS="None" />
             </Setter.Value>
         </Setter>-->
+    </Style>
+
+    <Style x:Key="SettingsEntryStyle" TargetType="Entry">
+        <Setter Property="Margin">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="UWP">0,0,0,0</On>
+                    <On Platform="Android, iOS">0,-10,0,0</On>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="ActivityIndicator">
