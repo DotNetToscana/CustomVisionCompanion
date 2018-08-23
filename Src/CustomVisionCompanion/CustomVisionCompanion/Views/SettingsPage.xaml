@@ -27,13 +27,16 @@
     <Grid Style="{StaticResource MasterGridStyle}">
         <ScrollView Style="{StaticResource ContentGridStyle}">
             <StackLayout>
-                <Label Style="{StaticResource CaptionLabelStyle}" Text="Prediction Key" />
+                <Label
+                    Margin="0,0,0,10"
+                    Style="{StaticResource CaptionLabelStyle}"
+                    Text="Prediction Key" />
                 <Entry
                     Placeholder="Insert value"
                     Style="{StaticResource SettingsEntryStyle}"
                     Text="{Binding PredictionKey}" />
                 <Label
-                    Margin="0,10,0,0"
+                    Margin="0,10,0,10"
                     Style="{StaticResource CaptionLabelStyle}"
                     Text="Project Id" />
                 <Entry
