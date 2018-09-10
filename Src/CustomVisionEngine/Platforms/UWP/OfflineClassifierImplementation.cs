@@ -40,7 +40,7 @@ namespace Plugin.CustomVisionEngine
                     binding.Bind("loss", output.Loss);
                     var evalResult = await learningModel.EvaluateAsync(binding, string.Empty);
 
-                    var result = output.Loss.OrderByDescending(l=>l.Value).Select(l => new Recognition { Tag = l.Key, Probability = l.Value });
+                    var result = output.Loss.OrderByDescending(l => l.Value).Select(l => new Recognition { Tag = l.Key, Probability = l.Value });
                     return result;
                 }
             }
