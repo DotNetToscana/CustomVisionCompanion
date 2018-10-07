@@ -18,7 +18,7 @@ namespace Plugin.CustomVisionEngine
         private const string INPUT_NAME = "Placeholder";
         private const string OUTPUT_NAME = "loss";
 
-        private List<String> labels;
+        private List<string> labels;
         private TensorFlowInferenceInterface inferenceInterface;
 
         public async Task InitializeAsync(ModelType modelType, params string[] parameters)
