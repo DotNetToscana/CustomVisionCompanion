@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomVisionCompanion.iOS",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomVisionCompanion.UWP", "CustomVisionCompanion\CustomVisionCompanion.UWP\CustomVisionCompanion.UWP.csproj", "{59121ED6-BAE1-4622-ADA3-C92D66201B1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomVisionCompanion", "CustomVisionCompanion\CustomVisionCompanion\CustomVisionCompanion.csproj", "{FDD2D1C0-6C82-4038-A1D8-C3B65BAE2915}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomVisionCompanion", "CustomVisionCompanion\CustomVisionCompanion\CustomVisionCompanion.csproj", "{FDD2D1C0-6C82-4038-A1D8-C3B65BAE2915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomVisionEngine", "CustomVisionEngine\CustomVisionEngine.csproj", "{F2616BEA-6D63-4804-89E1-9F590FF6A571}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomVisionEngine", "CustomVisionEngine\CustomVisionEngine.csproj", "{F2616BEA-6D63-4804-89E1-9F590FF6A571}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1557F11A-244E-4DCF-BB90-B01C916E84E8} = {1557F11A-244E-4DCF-BB90-B01C916E84E8}
 	EndProjectSection
