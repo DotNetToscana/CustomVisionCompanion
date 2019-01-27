@@ -18,8 +18,6 @@ namespace Plugin.CustomVisionEngine
         private LearningModelSession session;
         private LearningModelBinding binding;
 
-        private string[] tags;
-
         public async Task InitializeAsync(ModelType modelType, params string[] parameters)
         {
             var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(parameters[0]));
