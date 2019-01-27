@@ -47,11 +47,8 @@ CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "Computer");
 - Add the following line in the [constructor](https://github.com/DotNetToscana/CustomVisionCompanion/blob/master/Src/CustomVisionCompanion/CustomVisionCompanion.UWP/MainPage.xaml.cs#L28) of *MainPage.xaml.cs*:
 
 ```
-CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "ms-appx:///Assets/Models/Computer.onnx",
-    "controller", "keyboard", "laptop", "monitor", "mouse");
+CrossOfflineClassifier.Current.InitializeAsync(ModelType.General, "ms-appx:///Assets/Models/Computer.onnx");
 ```
-
-- In the line above, after the name of the ONNX file you need to pass all the tags of the models, in the same order you find in Custom Vision Portal. This method of passing data may be improved in the future.
 
 **Contribute**
 
