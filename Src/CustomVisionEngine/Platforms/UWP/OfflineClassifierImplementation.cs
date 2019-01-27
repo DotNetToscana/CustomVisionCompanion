@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Plugin.CustomVisionEngine.Models;
 using Plugin.CustomVisionEngine.Platforms.UWP;
-using Windows.AI.MachineLearning.Preview;
+using Windows.AI.MachineLearning;
 using Windows.Media;
 using Windows.Storage;
 
@@ -14,16 +14,17 @@ namespace Plugin.CustomVisionEngine
 {
     public class OfflineClassifierImplementation : IOfflineClassifier
     {
-        private LearningModelPreview learningModel;
-        private string[] tags;
+        private LearningModel model;
+        private LearningModelSession session;
+        private LearningModelBinding binding;
 
         public async Task InitializeAsync(ModelType modelType, params string[] parameters)
         {
             var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(parameters[0]));
-            var learningModel = await LearningModelPreview.LoadModelFromStorageFileAsync(file);
 
-            tags = parameters.Skip(1).ToArray();
-            this.learningModel = learningModel;
+            model = await LearningModel.LoadFromStreamAsync(file);
+            session = new LearningModelSession(model);
+            binding = new LearningModelBinding(session);
         }
 
         public async Task<IEnumerable<Recognition>> RecognizeAsync(Stream image, params string[] parameters)
@@ -32,13 +33,15 @@ namespace Plugin.CustomVisionEngine
             {
                 using (var frame = VideoFrame.CreateWithSoftwareBitmap(bitmap))
                 {
-                    var output = new ModelOutput(tags);
-                    var binding = new LearningModelBindingPreview(learningModel);
+                    var imageFeature = ImageFeatureValue.CreateFromVideoFrame(frame);
+                    binding.Bind("data", imageFeature);
 
-                    binding.Bind("data", frame);
-                    binding.Bind("classLabel", output.ClassLabel);
-                    binding.Bind("loss", output.Loss);
-                    var evalResult = await learningModel.EvaluateAsync(binding, string.Empty);
+                    var evalResult = await session.EvaluateAsync(binding, "0");
+                    var output = new ModelOutput()
+                    {
+                        ClassLabel = (evalResult.Outputs["classLabel"] as TensorString).GetAsVectorView().ToList(),
+                        Loss = (evalResult.Outputs["loss"] as IList<IDictionary<string, float>>)[0].ToDictionary(k => k.Key, v => v.Value)
+                    };
 
                     var result = output.Loss.OrderByDescending(l => l.Value).Select(l => new Recognition { Tag = l.Key, Probability = l.Value });
                     return result;

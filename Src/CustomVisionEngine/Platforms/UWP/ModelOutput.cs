@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.AI.MachineLearning;
 
 namespace Plugin.CustomVisionEngine.Platforms.UWP
 {
@@ -11,11 +12,5 @@ namespace Plugin.CustomVisionEngine.Platforms.UWP
         public IList<string> ClassLabel { get; set; }
 
         public IDictionary<string, float> Loss { get; set; }
-
-        public ModelOutput(params string[] tags)
-        {
-            ClassLabel = new List<string>();
-            Loss = tags.ToDictionary(k => k, v => float.NaN);
-        }
     }
 }
