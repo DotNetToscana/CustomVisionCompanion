@@ -1,11 +1,5 @@
 ﻿using Android.Graphics;
 using Android.Media;
-using Plugin.CustomVisionEngine.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Plugin.CustomVisionEngine.Platforms.Android
@@ -18,11 +12,9 @@ namespace Plugin.CustomVisionEngine.Platforms.Android
 
             await Task.Run(() =>
             {
-                using (var resizedBitmap = ResizeImage(image, bitmap, width, height))
-                {
-                    croppedBitmap = Crop(resizedBitmap, width, height);
-                    resizedBitmap.Recycle();
-                }
+                using var resizedBitmap = ResizeImage(image, bitmap, width, height);
+                croppedBitmap = Crop(resizedBitmap, width, height);
+                resizedBitmap.Recycle();
             });
 
             return croppedBitmap;
@@ -30,8 +22,6 @@ namespace Plugin.CustomVisionEngine.Platforms.Android
 
         private static Bitmap ResizeImage(System.IO.Stream image, Bitmap bitmap, int width, int height)
         {
-            Bitmap scaledBitmap = null;
-
             var originalPixelWidth = bitmap.Width;
             var originalPixelHeight = bitmap.Height;
 
@@ -49,8 +39,7 @@ namespace Plugin.CustomVisionEngine.Platforms.Android
                 aspectHeight = (int)(widthRatio * originalPixelHeight);
             }
 
-            scaledBitmap = Bitmap.CreateBitmap(aspectWidth, aspectHeight, Bitmap.Config.Argb8888);
-
+            var scaledBitmap = Bitmap.CreateBitmap(aspectWidth, aspectHeight, Bitmap.Config.Argb8888);
             var ratioX = aspectWidth / (float)bitmap.Width;
             var ratioY = aspectHeight / (float)bitmap.Height;
             var middleX = aspectWidth / 2.0f;
@@ -59,14 +48,14 @@ namespace Plugin.CustomVisionEngine.Platforms.Android
             var scaleMatrix = new Matrix();
             scaleMatrix.SetScale(ratioX, ratioY, middleX, middleY);
 
-            var canvas = new Canvas(scaledBitmap)
+            using var canvas = new Canvas(scaledBitmap)
             {
                 Matrix = scaleMatrix
             };
             canvas.DrawBitmap(bitmap, middleX - bitmap.Width / 2, middleY - bitmap.Height / 2, new Paint(PaintFlags.FilterBitmap));
 
             // check the rotation of the image and display it properly
-            var exif = new ExifInterface(image);
+            using var exif = new ExifInterface(image);
             var orientation = exif.GetAttributeInt(ExifInterface.TagOrientation, 0);
             var matrix = new Matrix();
 
@@ -92,7 +81,7 @@ namespace Plugin.CustomVisionEngine.Platforms.Android
 
         private static Bitmap Crop(Bitmap srcBmp, int width, int height)
         {
-            Bitmap dstBmp = null;
+            Bitmap dstBmp;
 
             if (srcBmp.Width >= srcBmp.Height)
             {

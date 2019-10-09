@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:common="clr-namespace:CustomVisionCompanion.Common"
-    xmlns:local="clr-namespace:CustomVisionCompanion"
     Title="Settings"
     BindingContext="{Binding Source={StaticResource Locator}, Path=SettingsViewModel}">
 
@@ -30,19 +29,38 @@
                 <Label
                     Margin="0,0,0,10"
                     Style="{StaticResource CaptionLabelStyle}"
+                    Text="Region" />
+                <Entry
+                    Placeholder="Insert value"
+                    Style="{StaticResource SettingsEntryStyle}"
+                    Text="{Binding Region}" />
+
+                <Label
+                    Margin="0,10,0,10"
+                    Style="{StaticResource CaptionLabelStyle}"
+                    Text="Project Name" />
+                <Entry
+                    Placeholder="Insert value"
+                    Style="{StaticResource SettingsEntryStyle}"
+                    Text="{Binding ProjectName}" />
+
+                <Label
+                    Margin="0,10,0,10"
+                    Style="{StaticResource CaptionLabelStyle}"
                     Text="Prediction Key" />
                 <Entry
                     Placeholder="Insert value"
                     Style="{StaticResource SettingsEntryStyle}"
                     Text="{Binding PredictionKey}" />
+
                 <Label
                     Margin="0,10,0,10"
                     Style="{StaticResource CaptionLabelStyle}"
-                    Text="Project Id" />
+                    Text="Iteration Id" />
                 <Entry
                     Placeholder="Insert value"
                     Style="{StaticResource SettingsEntryStyle}"
-                    Text="{Binding ProjectId}" />
+                    Text="{Binding IterationId}" />
             </StackLayout>
         </ScrollView>
     </Grid>

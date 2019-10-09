@@ -1,10 +1,10 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.65">
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
 
   <PropertyGroup>
     <!--Work around so the conditions work below-->
     <TargetFrameworks></TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.17763</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid90;uap10.0.18362</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid90</TargetFrameworks>
     <AssemblyName>Plugin.CustomVisionEngine</AssemblyName>
     <RootNamespace>Plugin.CustomVisionEngine</RootNamespace>
     <PackageId>Plugin.CustomVisionEngine</PackageId>
@@ -23,21 +23,19 @@
 
     <LangVersion>latest</LangVersion>
 
-    <!--TODO: Fill these in-->
     <PackageLicenseUrl>https://github.com/DotNetToscana/CustomVisionCompanion/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/DotNetToscana/CustomVisionCompanion</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DotNetToscana/CustomVisionCompanion</RepositoryUrl>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageIconUrl></PackageIconUrl>
-    <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, CustomVisionEngine</PackageTags>
+    <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin</PackageTags>
 
     <Title>CustomVisionEngine Plugin for Xamarin and Windows</Title>
     <Summary>Summary of nuget</Summary>
     <Description>A plug-in that allows to use Custom Vision service with online and offline models</Description>
 
-    <Owners>YOU</Owners>
     <Authors>Marco Minerva</Authors>
-    <Copyright>Copyright Marco Minerva 2018</Copyright>
+    <Copyright>Copyright Marco Minerva 2019</Copyright>
     <Company>Marco Minerva</Company>
   </PropertyGroup>
 
@@ -53,7 +51,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <Compile Include="Shared\**\*.cs" />
   </ItemGroup>
 

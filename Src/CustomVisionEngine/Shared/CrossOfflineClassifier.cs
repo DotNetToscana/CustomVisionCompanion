@@ -7,7 +7,7 @@ namespace Plugin.CustomVisionEngine
     /// </summary>
     public static class CrossOfflineClassifier
     {
-        private static Lazy<IOfflineClassifier> implementation = new Lazy<IOfflineClassifier>(() => CreateOfflineClassifier(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+        private static readonly Lazy<IOfflineClassifier> implementation = new Lazy<IOfflineClassifier>(() => CreateOfflineClassifier(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
         /// Gets if the plugin is supported on the current platform.
@@ -31,7 +31,7 @@ namespace Plugin.CustomVisionEngine
             }
         }
 
-        static IOfflineClassifier CreateOfflineClassifier()
+        private static IOfflineClassifier CreateOfflineClassifier()
         {
 #if NETSTANDARD1_0 || NETSTANDARD2_0
             return null;
@@ -42,7 +42,9 @@ namespace Plugin.CustomVisionEngine
 #endif
         }
 
-        internal static Exception NotImplementedInReferenceAssembly() =>
-            new NotImplementedException("This functionality is not implemented in the portable version of this assembly.  You should reference the NuGet package from your main application project in order to reference the platform-specific implementation.");
+        internal static Exception NotImplementedInReferenceAssembly()
+        {
+            return new NotImplementedException("This functionality is not implemented in the portable version of this assembly.  You should reference the NuGet package from your main application project in order to reference the platform-specific implementation.");
+        }
     }
 }

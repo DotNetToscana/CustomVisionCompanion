@@ -1,40 +1,37 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Plugin.CustomVisionEngine.Exceptions;
+using Plugin.CustomVisionEngine.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Plugin.CustomVisionEngine.Exceptions;
-using Plugin.CustomVisionEngine.Models;
 
 namespace Plugin.CustomVisionEngine
 {
     public class OnlineClassifierImplementation : IOnlineClassifier
     {
         private string predictionKey;
-        private Guid projectId;
-
         private HttpClient client;
 
-        public Task InitializeAsync(string predictionKey, Guid projectId, string customVisionEndpoint)
+        public Task InitializeAsync(string region, string predictionKey, string customVisionEndpoint)
         {
             this.predictionKey = predictionKey;
-            this.projectId = projectId;
+            var uri = string.Format(customVisionEndpoint, region);
 
             client = new HttpClient
             {
-                BaseAddress = new Uri(customVisionEndpoint.EndsWith("/") ? customVisionEndpoint : customVisionEndpoint += "/")
+                BaseAddress = new Uri(uri.EndsWith("/") ? uri : uri += "/")
             };
 
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<Recognition>> RecognizeAsync(Stream image, Guid? iterationId = null)
+        public async Task<IEnumerable<Recognition>> RecognizeAsync(string projectName, Guid iterationId, Stream image)
         {
-            var request = CreatePredictRequest(projectId, iterationId);
+            var request = CreatePredictRequest(projectName, iterationId);
 
             request.Content = new StreamContent(image);
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
@@ -49,17 +46,17 @@ namespace Plugin.CustomVisionEngine
             return results;
         }
 
-        public async Task<IEnumerable<Recognition>> RecognizeAsync(string predictionKey, Guid projectId, Stream image, Guid? iterationId, string customVisionEndpoint)
+        public async Task<IEnumerable<Recognition>> RecognizeAsync(string region, string predictionKey, string projectName, Guid iterationId, Stream image, string customVisionEndpoint)
         {
-            await InitializeAsync(predictionKey, projectId, customVisionEndpoint);
-            var results = await RecognizeAsync(image, iterationId);
+            await InitializeAsync(region, predictionKey, customVisionEndpoint);
+            var results = await RecognizeAsync(projectName, iterationId, image);
 
             return results;
         }
 
-        private HttpRequestMessage CreatePredictRequest(Guid projectId, Guid? iterationId)
+        private HttpRequestMessage CreatePredictRequest(string projectName, Guid iterationId)
         {
-            var endpoint = $"Prediction/{projectId}/image?iterationId={iterationId}";
+            var endpoint = $"Prediction/{iterationId}/classify/iterations/{projectName}/image";
             var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
             request.Headers.Add("Prediction-Key", predictionKey);
 
