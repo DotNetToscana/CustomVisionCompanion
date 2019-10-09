@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<?Mapping compile="true"                         ?>
+<?Mapping compile="true"        ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="DefaultColor">#0078D7</Color>
     <Color x:Key="StatusBarColor">#0063AD</Color>
@@ -23,14 +23,7 @@
 
     <Style x:Key="ContentGridStyle" TargetType="Grid">
         <Setter Property="Padding" Value="16,16,16,16" />
-        <Setter Property="Margin">
-            <Setter.Value>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="UWP">16,0,0,0</On>
-                    <On Platform="Android, iOS">0,0,0,0</On>
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Margin" Value="{OnPlatform UWP='16,0,0,0', Android='0,0,0,0', iOS='0,0,0,0'}" />
     </Style>
 
     <Style TargetType="Label">
@@ -42,8 +35,11 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
+    <Style x:Key="DescriptionLabelStyle" TargetType="Label" />
+
     <Style TargetType="Switch">
         <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="OnColor" Value="{StaticResource DefaultColor}" />
     </Style>
 
     <Style x:Key="SwitchLabelStyle" TargetType="Label">
@@ -62,42 +58,14 @@
     </Style>
 
     <Style x:Key="SettingsEntryStyle" TargetType="Entry">
-        <Setter Property="Margin">
-            <Setter.Value>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="UWP">0,0,0,0</On>
-                    <On Platform="Android, iOS">0,-10,0,0</On>
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Margin" Value="{OnPlatform UWP='0,0,0,0', Android='0,-10,0,0', iOS='0,-10,0,0'}" />
     </Style>
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{DynamicResource DefaultColor}" />
-        <Setter Property="HorizontalOptions">
-            <Setter.Value>
-                <OnPlatform x:TypeArguments="LayoutOptions">
-                    <On Platform="Android, iOS">CenterAndExpand</On>
-                    <On Platform="UWP">FillAndExpand</On>
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="VerticalOptions">
-            <Setter.Value>
-                <OnPlatform x:TypeArguments="LayoutOptions">
-                    <On Platform="Android, iOS">CenterAndExpand</On>
-                    <On Platform="UWP">FillAndExpand</On>
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="WidthRequest">
-            <Setter.Value>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android, iOS">-1</On>
-                    <On Platform="UWP">100</On>
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="HorizontalOptions" Value="{OnPlatform UWP=FillAndExpand, Android=CenterAndExpand, iOS=CenterAndExpand}" />
+        <Setter Property="VerticalOptions" Value="{OnPlatform UWP=FillAndExpand, Android=CenterAndExpand, iOS=CenterAndExpand}" />
+        <Setter Property="WidthRequest" Value="{OnPlatform UWP=100, Android=-1, iOS=-1}" />
     </Style>
 </ResourceDictionary>
 

@@ -7,7 +7,7 @@ namespace Plugin.CustomVisionEngine
     /// </summary>
     public static class CrossOnlineClassifier
     {
-        private static Lazy<IOnlineClassifier> implementation = new Lazy<IOnlineClassifier>(() => CreateOnlineClassifier(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+        private static readonly Lazy<IOnlineClassifier> implementation = new Lazy<IOnlineClassifier>(() => CreateOnlineClassifier(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
         /// Gets if the plugin is supported on the current platform.
@@ -31,14 +31,16 @@ namespace Plugin.CustomVisionEngine
             }
         }
 
-        static IOnlineClassifier CreateOnlineClassifier()
+        private static IOnlineClassifier CreateOnlineClassifier()
         {
 #pragma warning disable IDE0022 // Use expression body for methods
             return new OnlineClassifierImplementation();
 #pragma warning restore IDE0022 // Use expression body for methods
         }
 
-        internal static Exception NotImplementedInReferenceAssembly() =>
-            new NotImplementedException("This functionality is not implemented in the portable version of this assembly.  You should reference the NuGet package from your main application project in order to reference the platform-specific implementation.");
+        internal static Exception NotImplementedInReferenceAssembly()
+        {
+            return new NotImplementedException("This functionality is not implemented in the portable version of this assembly.  You should reference the NuGet package from your main application project in order to reference the platform-specific implementation.");
+        }
     }
 }

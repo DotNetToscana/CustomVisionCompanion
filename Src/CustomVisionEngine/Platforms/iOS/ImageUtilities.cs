@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Threading.Tasks;
 using UIKit;
 
@@ -15,10 +13,8 @@ namespace Plugin.CustomVisionEngine.Platforms.iOS
 
             await Task.Run(() =>
             {
-                using (var resizedImage = MaxResizeImage(image, width, height))
-                {
-                    croppedImage = CropImage(resizedImage, 0, 0, width, height);
-                }
+                using var resizedImage = MaxResizeImage(image, width, height);
+                croppedImage = CropImage(resizedImage, 0, 0, width, height);
             });
 
             return croppedImage;

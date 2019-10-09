@@ -1,8 +1,6 @@
-using Newtonsoft.Json;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 using System;
-using System.Threading.Tasks;
 
 namespace CustomVisionCompanion.Services
 {
@@ -13,9 +11,6 @@ namespace CustomVisionCompanion.Services
     /// </summary>
     public class SettingsService : ISettingsService
     {
-        private const string PREDICTION_KEY = nameof(PREDICTION_KEY);
-        private const string PROJECT_ID = nameof(PROJECT_ID);
-
         private readonly ISettings settings;
 
         public SettingsService()
@@ -23,16 +18,28 @@ namespace CustomVisionCompanion.Services
             settings = CrossSettings.Current;
         }
 
-        public string PredictionKey
+        public string Region
         {
-            get => settings.GetValueOrDefault(PREDICTION_KEY, null);
-            set => settings.AddOrUpdateValue(PREDICTION_KEY, value);
+            get => settings.GetValueOrDefault(nameof(Region), null);
+            set => settings.AddOrUpdateValue(nameof(Region), value);
         }
 
-        public string ProjectId
+        public string ProjectName
         {
-            get => settings.GetValueOrDefault(PROJECT_ID, Guid.Empty.ToString("D"));
-            set => settings.AddOrUpdateValue(PROJECT_ID, value);
+            get => settings.GetValueOrDefault(nameof(ProjectName), null);
+            set => settings.AddOrUpdateValue(nameof(ProjectName), value);
+        }
+
+        public string PredictionKey
+        {
+            get => settings.GetValueOrDefault(nameof(PredictionKey), null);
+            set => settings.AddOrUpdateValue(nameof(PredictionKey), value);
+        }
+
+        public string IterationId
+        {
+            get => settings.GetValueOrDefault(nameof(IterationId), Guid.Empty.ToString("D"));
+            set => settings.AddOrUpdateValue(nameof(IterationId), value);
         }
     }
 }
