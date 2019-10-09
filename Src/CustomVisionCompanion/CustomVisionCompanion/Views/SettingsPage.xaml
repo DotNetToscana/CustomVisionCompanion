@@ -27,38 +27,29 @@
         <ScrollView Style="{StaticResource ContentGridStyle}">
             <StackLayout>
                 <Label
-                    Margin="0,0,0,10"
+                    Margin="0,10,0,0"
                     Style="{StaticResource CaptionLabelStyle}"
                     Text="Region" />
                 <Entry
-                    Placeholder="Insert value"
+                    Placeholder="westeurope, southcentralus, ecc."
                     Style="{StaticResource SettingsEntryStyle}"
                     Text="{Binding Region}" />
 
-                <Label
-                    Margin="0,10,0,10"
-                    Style="{StaticResource CaptionLabelStyle}"
-                    Text="Project Name" />
+                <Label Style="{StaticResource CaptionLabelStyle}" Text="Project Name" />
                 <Entry
-                    Placeholder="Insert value"
+                    Placeholder="Insert the name"
                     Style="{StaticResource SettingsEntryStyle}"
                     Text="{Binding ProjectName}" />
 
-                <Label
-                    Margin="0,10,0,10"
-                    Style="{StaticResource CaptionLabelStyle}"
-                    Text="Prediction Key" />
+                <Label Style="{StaticResource CaptionLabelStyle}" Text="Prediction Key" />
                 <Entry
-                    Placeholder="Insert value"
+                    Placeholder="Insert the Prediction Key"
                     Style="{StaticResource SettingsEntryStyle}"
                     Text="{Binding PredictionKey}" />
 
-                <Label
-                    Margin="0,10,0,10"
-                    Style="{StaticResource CaptionLabelStyle}"
-                    Text="Iteration Id" />
+                <Label Style="{StaticResource CaptionLabelStyle}" Text="Iteration Id" />
                 <Entry
-                    Placeholder="Insert value"
+                    Placeholder="Insert the Iteration Id"
                     Style="{StaticResource SettingsEntryStyle}"
                     Text="{Binding IterationId}" />
             </StackLayout>
