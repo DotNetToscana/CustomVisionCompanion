@@ -31,7 +31,7 @@
                     Style="{StaticResource CaptionLabelStyle}"
                     Text="Region" />
                 <Entry
-                    Placeholder="westeurope, southcentralus, ecc."
+                    Placeholder="westeurope, southcentralus, etc."
                     Style="{StaticResource SettingsEntryStyle}"
                     Text="{Binding Region}" />
 
