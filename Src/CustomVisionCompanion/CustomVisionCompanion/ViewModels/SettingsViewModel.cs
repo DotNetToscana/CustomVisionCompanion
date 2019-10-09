@@ -29,7 +29,7 @@ namespace CustomVisionCompanion.ViewModels
             set => SettingsService.IterationId = value;
         }
 
-        public AutoRelayCommand OpenCustomVisionWebSiteCommand { get; set; }
+        public AutoRelayCommand OpenCustomVisionWebSiteCommand { get; private set; }
 
         public SettingsViewModel()
         {
